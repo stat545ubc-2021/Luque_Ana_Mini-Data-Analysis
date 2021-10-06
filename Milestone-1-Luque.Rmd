@@ -1,0 +1,39 @@
+---
+title: "Mileston-1-Luque.Rmd"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    theme: cosmo
+date:  "October 09, 2021"
+author: "Ana Luque"
+---
+
+Loading the packages:
+```{r}
+library(datateachr)
+library(tidyverse)
+```
+# Task 1:Choose your favorite dataset
+## 1.1
+Based on the description of the data sets the ones that looked more interesting and worth of data analysis were:
+
+_1. Flow sample_
+_2. Cancer sample_
+_3. Vancouver trees_
+_4. Steam games_
+
+## 1.2
+Exploring more information about the tibbles.
+```{r}
+#Exploring the Flow_sample tibble
+#To know the name of the columns, number of rows and columns glimpse function can be used
+glimpse(flow_sample)
+#Function used to open the data in the RStudio Data Window
+tibble::view(flow_sample)
+# Class prints the vector of names of classes an object inherits from.
+class(flow_sample)
+#Returns the first 6 rows of a dataframe,
+head(flow_sample)
+```
+
