@@ -14,7 +14,7 @@ Loading the packages:
 library(datateachr)
 library(tidyverse)
 ```
-# Task 1:Choose your favorite dataset
+# Task 1: Choose your favorite dataset
 ## 1.1
 Based on the description of the data sets the ones that looked more interesting and worth of data analysis were:
 
@@ -73,6 +73,7 @@ _Is there a relationship with the flow and the month of the year?_
 _Is there a relationship between the diagnosis and the area of the nucleus in the biopsy?_
 
 **Final choice: Cancer_sample**
+
 # Task 2: Exploring your dataset
 
 Exploration of the data set using dplyr and ggplot to get to know more the variables in the tibble *Cancer_samples*
@@ -93,27 +94,31 @@ It has the mean, standard deviation (se), and worst (max) values of each variabl
 * symmetry
 * fractal dimension ("coastline approximation" - 1)
 
-Moreover, a brief explanation of ggplot. It is a package that can be loaded in R studio used to generate different type of graphs. The first argument is always the tibble where your data set is store, then you will set the aesthetic mapping (with aes()), the first two variables are the x and the y axis, then you can add parameters like color and fill that are related to your variables. You then add on layers named geoms (like geom_point() or geom_histogram()), inside this layers you can also specify constant parameteres such as width, color and fill
+Moreover, a brief explanation of ggplot. It is a package that can be loaded in R studio used to generate different type of graphs. The first argument is always the tibble where your data set is store, then you will set the aesthetic mapping (with aes()), the first two variables are the x and the y axis, then you can add parameters like color and fill that are related to your variables. You then add on layers named geoms (like geom_point() or geom_histogram()), inside this layers you can also specify constant parameteres such as width, color and fill.
 
+Another package I was using is called dplyr, is for data manipulation, allowing you to add new variables (mutate), select a set of columns by their names (select), filter some rows (filter), reduce multiple variables into a summary (summaries) etc.. 
+
+"%in%" Is used instead of "==" 
+" %>% " Is for pipping and is used to nest functions
 "<-" is used to sign a function to a variable
 "print" is used to print the variable in the r console
 
 ### First excercise 
-I will analyze the distribution of a the area (um^2) of the nucleolus in the different biopsies, to see how much variability the data set has and if is worth comparing it with other variables
+To get to know better the data set I will make a bar graph that counts the amount of patients diagnose with a benign and malign tumor. 
+Furthermore, I will analyze the distribution of the perimeter (um) of the nucleolus in the different biopsies, to see how much variability the data set has and if is worth comparing it with other variables
 ```{r}
-# To know the distribution of a single variable (the area) in both benign and malign tumors I used geom_distribution, I used ..density..  to create the histogram with a density scale. Fill was used to color the inside of the histogram
-Ex1.1 <- ggplot(cancer_sample, aes(area_mean)) +
-   geom_histogram(fill = "green")
-print(Ex1.1)
+# A bar chart was used to count the number of patients with malign and benign tumors, this function only need the x value, since it adds bars whose height is proportional to the number of rows. 
+#To add the number of patients in the graph geom_text was used. By setting vjust (the vertical justification), it is possible to move the text above or below the tops of the bars, 1.5 to put it above the bars.
 
-# I wanted to know the distribution of the area by diagnosis, to see if the area is different for malign and benign tumors and if there is a relationship, also to see in which the is more heterogeneity. Malign tumors tend to have bigger nucleus 
-#Using geom_density you don't have to specify ..density.. it does it automatically.
-#Putting fill inside of the aes in the geom_density layer is used to put in a different color the distribution of the two diagnosis.
-#Alpha is used for transparency of the color (when the graphs are overlapping)
-Ex1.2 <- ggplot(cancer_sample, aes(area_mean)) + 
-    geom_density(aes(fill = diagnosis), alpha=0.8)
+Ex1.2 <- ggplot(cancer_sample,aes(diagnosis)) +
+  geom_bar(fill = "orange", alpha = 0.6) +
+  geom_text(aes(label = ..count..), stat = "count", vjust = 1.5)
 print(Ex1.2)
 
+## To know the distribution of the perimeter for both benign and malign tumor geom_jitter was used,that shows in what ranges the values are located and if there is any difference between the perimeter of benign tumors and malign tumors. Since one of the main factors to detect a malign tumor during pathology analysis is to look for large nucleus. The color, transparency (alpha) and width are constant, that is why it goes directly in the geom layer outside the aes
+Ex1.1<- ggplot(cancer_sample, aes(diagnosis, perimeter_mean)) + 
+    geom_jitter(color= "red", alpha = 0.4, width = 0.25)
+print(Ex1.1)
 ```
 
 ### Second exercise
@@ -128,13 +133,50 @@ print(Ex2)
 ```
 
 ### Third exercise
+I will analyze the density of a the area (um^2) of the nucleolus in the different biopsies, to see how much variability the data set has and if is worth comparing it with other variables
 ```{r}
-Ex3<- ggplot(cancer_sample, aes(diagnosis, perimeter_mean)) + 
-    geom_jitter(color= "red", alpha = 0.4, width = 0.25)
-print(Ex3)
+# To know the density of a single variable (the area) in both benign and malign tumors I used geom_distribution, I used ..density..  to create the histogram with a density scale. Fill was used to color the inside of the histogram
+Ex3.1 <- ggplot(cancer_sample, aes(area_mean)) +
+   geom_histogram(fill = "green", alpha = 0.7)
+print(Ex3.1)
 
-Ex3.2 <- ggplot(cancer_sample) +
-  geom_bar(mapping = aes(diagnosis, ..count..), fill = "yellow", alpha = 0.6) 
+# I wanted to know the density of the area by diagnosis, to see if the area is different for malign and benign tumors and if there is a relationship, also to see in which the is more heterogeneity. Malign tumors tend to have bigger nucleus 
+#Using geom_density you don't have to specify ..density.. it does it automatically.
+#Putting fill inside of the aes in the geom_density layer is used to put in a different color the distribution of the two diagnosis.
+#Alpha is used for transparency of the color (when the graphs are overlapping)
+Ex3.2 <- ggplot(cancer_sample, aes(area_mean)) + 
+    geom_density(aes(fill = diagnosis), alpha=0.8)
 print(Ex3.2)
 ```
+### Forth excercise 
+I want to know the mean values for the two diagnostic groups, to analyze which variables are clues in detecting malign and benign tumors or if there is any difference between the two groups. Moreover, the standard deviation can be used to know the variation. 
+
+```{r}
+# First I grouped the data set by diagnosis to have a group with all the data regarding malign tumors and data regarding benign tumors.
+# The summarize function collapses the information from all the rows from each group in one 
+# Mean is used to obtain the mean within the values in the group and sd is used for standard deviation
+# Digits is used to set the amount of digits shown in the table 
+# Pivot_longer and pivot_wider are used to transpose the data to have a better and understandable table
+Ex4 <- cancer_sample %>%
+  group_by(diagnosis) %>%
+  summarise(Mean_area = mean(area_mean),
+            Sd_area = sd(area_mean),
+            Mean_perimeter = mean(perimeter_mean),
+            SD_perimeter = sd(perimeter_mean),
+            Mean_texture = mean(texture_mean),
+            SD_texture = sd(texture_mean),
+            Mean_smoothness = mean(smoothness_mean),
+            SD_smoothness = sd(smoothness_mean), digits = 2)%>%
+               pivot_longer(cols = -diagnosis, names_to = 'Diagnosis') %>% 
+               pivot_wider(names_from = diagnosis, values_from = value)
+head(Ex4)
+```
+# Task 3: Research questions
+
+The main objective of analyzing this data set is to determine which variables can be used to diagnose tumors by imaging abalyzis of nucleous from biopsis. 
+
+1. Is there a difference within the area of the nucleus of benign tumors and malign tumors?
+2. Does malign tumors have more variability in smoothness in their nucleus than benign tumors?
+3. Could it be possible to diagnose the tumor of a patience just by looking at the concavity of the nucleolus?
+4. Is there a relationship between the symmetry of the nucleolus and the compactness in malign tumors? 
 
