@@ -35,5 +35,106 @@ tibble::view(flow_sample)
 class(flow_sample)
 #Returns the first 6 rows of a dataframe,
 head(flow_sample)
+
+#Exploring the cancer_sample
+glimpse(cancer_sample)
+tibble::view(cancer_sample)
+class(cancer_sample)
+head(cancer_sample)
+
+#Exploring the Vancouver_trees
+glimpse(vancouver_trees)
+tibble::view(vancouver_trees)
+class(vancouver_trees)
+head(vancouver_trees)
+
+#Exploring the steam_games
+glimpse(steam_games)
+tibble::view(steam_games)
+class(steam_games)
+head(steam_games)
+```
+
+## 1.3
+By analyzing the content of the tibbles I choose the following data sets
+_1. Flow sample_
+_2. Cancer sample_
+
+**Flow_sample** seems a very simple data set, however it has both quantitative and qualitative variables that can be used to group the information according to the content of the rows. Also a lot of information can be obtained from it, for example knowing in which month more flow is produced.
+
+**Cancer_sample** I liked this data set because I am pretty familiarized with it, since my research is related to bladder cancer patients. Moreover, I have more experience working with quantitative data, because exact conclusions can be obtained from it. I would like to know if there is some relationship between the characteristic of the nucleus from the breast biopsy and the diagnosis.
+
+## 1.4
+Research questions related to each data set 
+**Flow sample**
+_Is there a relationship with the flow and the month of the year?_
+
+**Cancer_sample**
+_Is there a relationship between the diagnosis and the area of the nucleus in the biopsy?_
+
+**Final choice: Cancer_sample**
+# Task 2: Exploring your dataset
+
+Exploration of the data set using dplyr and ggplot to get to know more the variables in the tibble *Cancer_samples*
+
+First of all, a brief introduction of the data set. *Cancer_samples* was obtained from the UCI Machine Learning Repository and it contains information about the cell nuclei in the biopsy of a breast cancer mass obtained with fine needle aspirate (FNA) and analysed trough machine learning using digitized imaging. 
+It contains the ID of the patient and the diagnosis B: benign tumor and M= malign tumor.
+
+It has the mean, standard deviation (se), and worst (max) values of each variable:
+
+* radius (mean of distances from center to points on the perimeter)in um
+* texture (standard deviation of gray-scale values)
+* perimeter in um
+* area in um^2
+* smoothness (local variation in radius lengths)
+* compactness (perimeter^2 / area - 1.0)
+* concavity (severity of concave portions of the contour)
+* concave points (number of concave portions of the contour)
+* symmetry
+* fractal dimension ("coastline approximation" - 1)
+
+Moreover, a brief explanation of ggplot. It is a package that can be loaded in R studio used to generate different type of graphs. The first argument is always the tibble where your data set is store, then you will set the aesthetic mapping (with aes()), the first two variables are the x and the y axis, then you can add parameters like color and fill that are related to your variables. You then add on layers named geoms (like geom_point() or geom_histogram()), inside this layers you can also specify constant parameteres such as width, color and fill
+
+"<-" is used to sign a function to a variable
+"print" is used to print the variable in the r console
+
+### First excercise 
+I will analyze the distribution of a the area (um^2) of the nucleolus in the different biopsies, to see how much variability the data set has and if is worth comparing it with other variables
+```{r}
+# To know the distribution of a single variable (the area) in both benign and malign tumors I used geom_distribution, I used ..density..  to create the histogram with a density scale. Fill was used to color the inside of the histogram
+Ex1.1 <- ggplot(cancer_sample, aes(area_mean)) +
+   geom_histogram(fill = "green")
+print(Ex1.1)
+
+# I wanted to know the distribution of the area by diagnosis, to see if the area is different for malign and benign tumors and if there is a relationship, also to see in which the is more heterogeneity. Malign tumors tend to have bigger nucleus 
+#Using geom_density you don't have to specify ..density.. it does it automatically.
+#Putting fill inside of the aes in the geom_density layer is used to put in a different color the distribution of the two diagnosis.
+#Alpha is used for transparency of the color (when the graphs are overlapping)
+Ex1.2 <- ggplot(cancer_sample, aes(area_mean)) + 
+    geom_density(aes(fill = diagnosis), alpha=0.8)
+print(Ex1.2)
+
+```
+
+### Second exercise
+Explore the relationship between 2 variables in a plot.I wanted to know if there is a relationship between the perimeter of the nuclei and the concavity.Since larger cells (with bigger perimeter) tend to have more concave portions of the contour. I group the plot by diagnosis to see the variability within each group or if it has come distinguish characteristics. 
+
+
+```{r}
+#To do a scatter plot I used geom_point with the perimeter in the x axis and the concavity in the y axis. Using the shape outside aes sinceis a constant value 
+Ex2<- ggplot(cancer_sample, aes(perimeter_mean, concavity_mean)) +
+       geom_point(mapping = aes( fill = diagnosis), shape = 21)
+print(Ex2)
+```
+
+### Third exercise
+```{r}
+Ex3<- ggplot(cancer_sample, aes(diagnosis, perimeter_mean)) + 
+    geom_jitter(color= "red", alpha = 0.4, width = 0.25)
+print(Ex3)
+
+Ex3.2 <- ggplot(cancer_sample) +
+  geom_bar(mapping = aes(diagnosis, ..count..), fill = "yellow", alpha = 0.6) 
+print(Ex3.2)
 ```
 
