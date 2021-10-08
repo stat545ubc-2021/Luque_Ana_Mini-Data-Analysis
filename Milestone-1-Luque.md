@@ -1,4 +1,4 @@
-Mileston-1-Luque.Rmd
+Milestone-1-Luque.Rmd
 ================
 Ana Luque
 October 09, 2021
