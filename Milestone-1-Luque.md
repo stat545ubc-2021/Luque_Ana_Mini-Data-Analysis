@@ -618,7 +618,8 @@ Ex4
 
 The main objective of analyzing this data set is to determine which
 variables can be used to diagnose tumors by imaging analysis of nuclei
-from biopsies.
+from biopsies, and the main differences between de nuclei of benign and
+malign tumors.
 
 1.  Is there a difference within the area of the nuclei of benign and
     malign tumors?
