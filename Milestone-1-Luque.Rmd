@@ -1,5 +1,5 @@
 ---
-title: "Mileston-1-Luque.Rmd"
+title: "Milestone-1-Luque.Rmd"
 output: 
   github_document
 date:  "October 09, 2021"
@@ -159,13 +159,14 @@ I want to know the mean values for the two diagnostic groups, to analyze which v
 # The summarise_at function collapses the information of the selected columns from all the rows from each group in one 
 # Mean is used to obtain the mean within the values in the group
 # Pivot_longer and pivot_wider are used to transpose the data to have a better and understandable table
+# Mutate is used to round all the numeric variables to 3 digits
 
 Ex4 <- cancer_sample %>%
   group_by(diagnosis) %>%
   summarise_at(vars(texture_mean:concavity_mean), mean) %>%
                pivot_longer(cols = -diagnosis, names_to = 'Diagnosis') %>% 
-               pivot_wider(names_from = diagnosis, values_from = value)
-head(Ex4)
+               pivot_wider(names_from = diagnosis, values_from = value) %>%                      mutate(across(where(is.numeric), ~ round(., 3)))
+Ex4
 ```
 # Task 3: Research questions
 

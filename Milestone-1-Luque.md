@@ -594,24 +594,25 @@ my data**.
 # The summarise_at function collapses the information of the selected columns from all the rows from each group in one 
 # Mean is used to obtain the mean within the values in the group
 # Pivot_longer and pivot_wider are used to transpose the data to have a better and understandable table
+# Mutate is used to round all the numeric variables to 3 digits
 
 Ex4 <- cancer_sample %>%
   group_by(diagnosis) %>%
   summarise_at(vars(texture_mean:concavity_mean), mean) %>%
                pivot_longer(cols = -diagnosis, names_to = 'Diagnosis') %>% 
-               pivot_wider(names_from = diagnosis, values_from = value)
-head(Ex4)
+               pivot_wider(names_from = diagnosis, values_from = value) %>%                      mutate(across(where(is.numeric), ~ round(., 3)))
+Ex4
 ```
 
     ## # A tibble: 6 x 3
-    ##   Diagnosis               B       M
-    ##   <chr>               <dbl>   <dbl>
-    ## 1 texture_mean      17.9     21.6  
-    ## 2 perimeter_mean    78.1    115.   
-    ## 3 area_mean        463.     978.   
-    ## 4 smoothness_mean    0.0925   0.103
-    ## 5 compactness_mean   0.0801   0.145
-    ## 6 concavity_mean     0.0461   0.161
+    ##   Diagnosis              B       M
+    ##   <chr>              <dbl>   <dbl>
+    ## 1 texture_mean      17.9    21.6  
+    ## 2 perimeter_mean    78.1   115.   
+    ## 3 area_mean        463.    978.   
+    ## 4 smoothness_mean    0.092   0.103
+    ## 5 compactness_mean   0.08    0.145
+    ## 6 concavity_mean     0.046   0.161
 
 # Task 3: Research questions
 
