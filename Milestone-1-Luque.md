@@ -436,12 +436,12 @@ summary(steam_games)
 
 ## 1.3
 
-By analyzing the content of the tibbles I choose the following data sets
+By analyzing the content of the tibbles I chose the following data sets
 *1. Flow sample* *2. Cancer sample*
 
 **Flow\_sample** seems a very simple data set, however it has both
 quantitative and qualitative variables that can be used to group the
-information according to the content of the rows. Also a lot of
+information according to the content of the rows. Also, a lot of
 information can be obtained from it, for example knowing in which month
 more flow is produced.
 
@@ -455,7 +455,7 @@ nuclei from the breast biopsy and the diagnosis.
 ## 1.4
 
 Research questions related to each data set **Flow sample** *Is there a
-relationship with the flow and the month of the year?*
+relationship between the flow and the month of the year?*
 
 **Cancer\_sample** *Is there a relationship between the diagnosis and
 the area of the nuclei in the biopsy?*
@@ -470,7 +470,7 @@ the variables in the tibble *Cancer\_samples*
 First of all, a brief introduction of the data set. *Cancer\_samples*
 was obtained from the UCI Machine Learning Repository and it contains
 information about the cell nuclei in the biopsy of a breast cancer mass
-obtained with fine needle aspirate (FNA) and analysed trough machine
+obtained with fine needle aspirate (FNA) and analyzed through machine
 learning using digitized imaging. It contains the ID of the patient and
 the diagnosis B: benign tumor and M= malign tumor.
 
@@ -491,7 +491,7 @@ variable:
 
 Moreover, a brief explanation of ggplot. It is a package that can be
 loaded in R studio used to generate different type of graphs. The first
-argument is always the tibble where your data set is store, then you
+argument is always the tibble where your data set is stored, then you
 will set the aesthetic mapping (with aes()), the first two variables are
 the x and the y axis, then you can add parameters like color and fill
 that are related to your variables. You then add on layers named geoms
@@ -510,7 +510,7 @@ nest functions “&lt;-” is used to assign a function to a variable
 ### First excercise
 
 To get to know better the data set I will make a bar graph that counts
-the amount of patients diagnose with a benign and malign tumor.
+the amount of patients diagnosed with a benign and malign tumor.
 Furthermore, I will analyze the **distribution** of the perimeter (um)
 of the nuclei in the different biopsies, to see how much variability the
 data set has and if is worth comparing it with other variables
@@ -541,7 +541,7 @@ print(Ex1.1)
 Explore the **relationship between 2 variables** in a plot.I wanted to
 know if there is a relationship between the perimeter of the nuclei and
 the concavity.Since larger cells (with bigger perimeter) tend to have
-more concave portions of the contour. I group the plot by diagnosis to
+more concave portions of the contour. I grouped the plot by diagnosis to
 see the variability within each group or if it has some distinguish
 characteristics.
 
@@ -582,7 +582,10 @@ print(Ex3.2)
 ```
 
 ![](Milestone-1-Luque_files/figure-gfm/unnamed-chunk-5-2.png)<!-- -->
-\#\#\# Forth excercise I want to know the mean values for the two
+
+### Forth exercise
+
+I want to know the mean values for the two
 diagnostic groups, to analyze which variables are clues in detecting
 malign and benign tumors or if there is any difference between the two
 groups. Moreover, the standard deviation can be used to know the
