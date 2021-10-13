@@ -1,0 +1,101 @@
+---
+title: "Milestone-2-Luque.Rmd"
+output: 
+  github_document
+date:  "October 16, 2021"
+author: "Ana Luque"
+---
+
+
+Loading the packages:
+```{r}
+#install packages with: install.packages() if not installed already
+library(datateachr) #contains the cancer_sample data set I am working 
+library(tidyverse) #contains the packages to analyze the data 
+```
+
+# Task 1: Process and summarize your data
+
+During Milestone 2 I will be working with the data set: **Cancer_samples**. This tibble was obtained from the UCI Machine Learning Repository and it contains information about the cell nuclei in the biopsy of a breast cancer mass obtained with fine needle aspirate (FNA) and analysed trough machine learning using digitized imaging.For more information about the data set Milestone 1 can be consulted.
+
+Data manipulation packages *(dyplr and tidyr)* will be used to explore more in depth the data set.
+
+## 1.1
+
+By analyzing the content of the data set four research questions where generated. deeper analyzes is needed to answer this questions. The main idea of exploring *cancer_samples* is to determine if it is possible to use Machine learning to process biopsy from cancer patience and determine if the tumor is malign or benign. This could significantly decrease the processing time it takes for the pathology department to process samples. In cancer patience time is quiet valuable, the sooner the treatment is started the better the probabilities of surviving. 
+
+1. Is there a difference within the area of the nuclei of benign and malign tumors?
+2. Does malign tumors have more variability in smoothness in their nuclei than benign tumors?
+3. Could it be possible to diagnose the tumor of a patience just by looking at the concavity of the nuclei?
+4. Is there a relationship between the symmetry of the nuclei and the compactness in malign tumors? 
+
+## 1.2 
+
+Analyzing the research questions with R studio using summarizing and graphing packages 
+
+#### First research questions
+*Is there a difference within the area of the nuclei of benign and malign tumors?*
+
+```{r}
+Q1.1 <- cancer_sample %>%
+  group_by(diagnosis) %>%
+  arrange(area_mean)  %>%
+  summarise(Mean_area = mean(area_mean),
+            SD_area = sd(area_mean),
+            Min_area = min(area_mean),
+            Median_area = median(area_mean),
+            Max_area = max(area_mean)) %>%
+               pivot_longer(cols = -diagnosis, names_to = 'Diagnosis') %>% 
+               pivot_wider(names_from = diagnosis, values_from = value) %>%                     mutate(across(where(is.numeric), ~ round(., 1)))
+Q1.1
+
+Q1.2 <- ggplot(cancer_sample, aes(diagnosis, area_mean)) + 
+    geom_boxplot(width = 0.3) +
+    geom_jitter(alpha = 0.08, width = 0.2) +
+    labs(title="Area of the nuclei in breast cancer tumors", y ="Area (um^2)", x = "Diagnosis")
+print(Q1.2)
+
+Q1.3 <- ggplot(cancer_sample, aes(area_mean)) + 
+    geom_density(aes(fill = diagnosis), alpha=0.8)
+print(Ex1.3)
+```
+
+#### Second research questions
+*Does malign tumors have more variability in smoothness in their nuclei than benign tumors* 
+```{r}
+
+```
+#### Third research questions
+*Could it be possible to diagnose the tumor of a patience just by looking at the concavity of the nuclei?* 
+```{r}
+Q3.1 <- cancer_sample %>%
+  arrange(concavity_mean)  %>%
+  summarise(Mean_concavity = mean(concavity_mean),
+            Min_concavity = min(concavity_mean),
+            Median_concavity = median(concavity_mean),
+            Max_concavity = max(concavity_mean)) %>%
+              mutate(across(where(is.numeric), ~ round(., 3)))
+Q3.1
+
+#Divide concavity in low medium, high
+Q3.2 <- cancer_sample %>%
+    select(diagnosis, concavity_mean) %>%
+    arrange(concavity_mean)
+head(Q3.2)
+
+QX <- mutate(Q3.2, concavity = ifelse (concavity_mean <0.1, "normal",
+                               ifelse (concavity_mean >0.25, "extremly high", "high")))
+QX
+#ifelse(concavity_mean <0.14, 'low') %>%
+    #ifelse(concavity_mean >0.14, 'medium') %>%
+    #ifelse(concavity_mean  >0.28, 'high')
+#ifelse (concavity_mean == 0.1:0.25, "X"
+
+Ex3.3 <- ggplot(cancer_sample, aes(concavity_mean)) + 
+    geom_density(aes(fill = diagnosis), alpha=0.8)
+print(Ex3.3)
+
+# frecuency in tidiverse histograms 
+
+```
+
