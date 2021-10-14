@@ -131,4 +131,7 @@ print(Q4.3)
 #code obtained from: http://www.sthda.com/english/wiki/ggplot2-axis-scales-and-transformations#axis-transformations
 
 ```
+## 1.2 
+
+#Task 2: Tidy your data 
 
