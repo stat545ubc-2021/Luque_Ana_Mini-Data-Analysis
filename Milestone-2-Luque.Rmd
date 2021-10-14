@@ -12,6 +12,8 @@ Loading the packages:
 #install packages with: install.packages() if not installed already
 library(datateachr) #contains the cancer_sample data set I am working 
 library(tidyverse) #contains the packages to analyze the data 
+library(scales) #provides the internal scaling infrastructure used by ggplot2
+library(broom)
 ```
 
 # Task 1: Process and summarize your data
@@ -37,6 +39,7 @@ Analyzing the research questions with R studio using summarizing and graphing pa
 *Is there a difference within the area of the nuclei of benign and malign tumors?*
 
 ```{r}
+# 
 Q1.1 <- cancer_sample %>%
   group_by(diagnosis) %>%
   arrange(area_mean)  %>%
@@ -49,6 +52,7 @@ Q1.1 <- cancer_sample %>%
                pivot_wider(names_from = diagnosis, values_from = value) %>%                     mutate(across(where(is.numeric), ~ round(., 1)))
 Q1.1
 
+#
 Q1.2 <- ggplot(cancer_sample, aes(diagnosis, area_mean)) + 
     geom_boxplot(width = 0.3) +
     geom_jitter(alpha = 0.08, width = 0.2) +
@@ -68,6 +72,7 @@ print(Ex1.3)
 #### Third research questions
 *Could it be possible to diagnose the tumor of a patience just by looking at the concavity of the nuclei?* 
 ```{r}
+#to know the basic information about concavity
 Q3.1 <- cancer_sample %>%
   arrange(concavity_mean)  %>%
   summarise(Mean_concavity = mean(concavity_mean),
@@ -77,25 +82,53 @@ Q3.1 <- cancer_sample %>%
               mutate(across(where(is.numeric), ~ round(., 3)))
 Q3.1
 
-#Divide concavity in low medium, high
+#Divide concavity in low medium, high, Low concavity means that the nuclei is round as normal
 Q3.2 <- cancer_sample %>%
     select(diagnosis, concavity_mean) %>%
-    arrange(concavity_mean)
-head(Q3.2)
-
-QX <- mutate(Q3.2, concavity = ifelse (concavity_mean <0.1, "normal",
+    arrange(concavity_mean) %>%
+     mutate(concavity = ifelse (concavity_mean <0.1, "normal",
                                ifelse (concavity_mean >0.25, "extremly high", "high")))
-QX
-#ifelse(concavity_mean <0.14, 'low') %>%
-    #ifelse(concavity_mean >0.14, 'medium') %>%
-    #ifelse(concavity_mean  >0.28, 'high')
-#ifelse (concavity_mean == 0.1:0.25, "X"
+Q3.2
 
-Ex3.3 <- ggplot(cancer_sample, aes(concavity_mean)) + 
+Q3.3 <- count(Q3.2, diagnosis, concavity) 
+head(Q3.3)
+
+
+# 
+Q3.4 <- ggplot(Q3.2, aes(concavity, ..count..)) +
+   geom_bar(fill= "orange", alpha = 0.7, position = "dodge") +
+   facet_wrap(~ diagnosis) +
+   geom_text(aes(label = ..count..), stat = "count", vjust = 0.1)
+print(Q3.4)
+
+
+#alpha transperenci is used to see the intersections of the two groups 
+Ex3.5 <- ggplot(cancer_sample, aes(concavity_mean)) + 
     geom_density(aes(fill = diagnosis), alpha=0.8)
-print(Ex3.3)
+print(Ex3.5)
 
 # frecuency in tidiverse histograms 
+
+```
+#### Forth research questions
+*Is there a relationship between the symmetry of the nuclei and the compactness in malign tumors?* 
+```{r}
+
+# smooth Aids the eye in seeing patterns in the presence of overplotting. 
+#Locally Weighted Least Squares Regression. So, it uses more local data to estimate our Y variable
+Q4.2 <- ggplot(cancer_sample, aes(symmetry_mean, compactness_mean)) + 
+  geom_point(aes(colour = diagnosis)) +
+  geom_smooth(method = lm, formula = y ~ x) +
+  scale_y_continuous(trans = log10_trans(),
+    breaks = trans_breaks("log10", function(x) 10^x),
+    labels = trans_format("log10", math_format(10^.x))) +
+    labs(title="Relationship between symmetry and compactness of the nuclei in breast tumors", y ="Compactness", x = "Symmetry")
+print(Q4.2)
+
+Q4.3 <- glance((lm(symmetry_mean ~ compactness_mean, cancer_sample)))
+print(Q4.3)
+
+#code obtained from: http://www.sthda.com/english/wiki/ggplot2-axis-scales-and-transformations#axis-transformations
 
 ```
 
