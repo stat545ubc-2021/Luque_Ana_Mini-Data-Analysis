@@ -1,3 +1,0 @@
-"0","#install packages with: install.packages() if not installed already"
-"0","library(datateachr) #contains the cancer_sample data set I am working "
-"0","library(tidyverse) #contains the packages to analyze the data "
