@@ -60,7 +60,9 @@ summary(steam_games)
 
 ## 1.3
 By analyzing the content of the tibbles I choose the following data sets
+
 _1. Flow sample_
+
 _2. Cancer sample_
 
 **Flow_sample** seems a very simple data set, however it has both quantitative and qualitative variables that can be used to group the information according to the content of the rows. Also a lot of information can be obtained from it, for example knowing in which month more flow is produced.
@@ -68,7 +70,8 @@ _2. Cancer sample_
 **Cancer_sample** I liked this data set because I am pretty familiarized with it, since my research is related to bladder cancer patients. Moreover, I have more experience working with quantitative data, because exact conclusions can be obtained from it. I would like to know if there is some relationship between the characteristic of the nuclei from the breast biopsy and the diagnosis.
 
 ## 1.4
-Research questions related to each data set 
+Research questions related to each data set:
+
 **Flow sample**
 _Is there a relationship with the flow and the month of the year?_
 

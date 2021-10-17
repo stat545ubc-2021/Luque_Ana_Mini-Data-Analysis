@@ -1,0 +1,7 @@
+"0","#install packages with: install.packages(""package"") if not installed already"
+"0","library(datateachr) #contains the cancer_sample data set I am working "
+"0","library(tidyverse) #contains the packages to analyze the data "
+"0","library(scales) #provides the internal scaling infrastructure used by ggplot2"
+"0","library(broom)"
+"0","library(ggpubr) #package that aloud you to combine multiple ggplots in one graph"
+"0","theme_set(theme_pubr()) #Default function theme_pubr that creates a publication ready theme"
