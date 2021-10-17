@@ -3,7 +3,7 @@
     "path": "~/Documents/1. UBC/STAT545/Collaborative/Luque_Ana_Mini-Data-Analysis/Milestone-1-Luque.Rmd",
     "project_path": "Milestone-1-Luque.Rmd",
     "type": "r_markdown",
-    "hash": "3030137859",
+    "hash": "0",
     "contents": "",
     "dirty": false,
     "created": 1634267262023.0,
@@ -16,11 +16,11 @@
         "scrollLine": "70"
     },
     "folds": "",
-    "lastKnownWriteTime": 1634493773,
+    "lastKnownWriteTime": 1634494599,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1634493774874,
+    "last_content_update": 1634494599,
     "read_only": false,
     "read_only_alternatives": []
 }
