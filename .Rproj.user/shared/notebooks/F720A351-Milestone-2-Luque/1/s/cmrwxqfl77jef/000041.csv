@@ -1,0 +1,3 @@
+"0","T2.1<- cancer_sample %>%"
+"0","  select(diagnosis, area_mean, perimeter_mean, smoothness_mean, concavity_mean, symmetry_mean, compactness_mean, texture_mean)"
+"0","T2.1"

@@ -11,14 +11,14 @@ library(datateachr)
 library(tidyverse)
 ```
 
-    ## -- Attaching packages --------------------------------------- tidyverse 1.3.1 --
+    ## ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.1 ──
 
-    ## v ggplot2 3.3.5     v purrr   0.3.4
-    ## v tibble  3.1.4     v dplyr   1.0.7
-    ## v tidyr   1.1.3     v stringr 1.4.0
-    ## v readr   2.0.1     v forcats 0.5.1
+    ## ✓ ggplot2 3.3.5     ✓ purrr   0.3.4
+    ## ✓ tibble  3.1.5     ✓ dplyr   1.0.7
+    ## ✓ tidyr   1.1.4     ✓ stringr 1.4.0
+    ## ✓ readr   2.0.2     ✓ forcats 0.5.1
 
-    ## -- Conflicts ------------------------------------------ tidyverse_conflicts() --
+    ## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
     ## x dplyr::filter() masks stats::filter()
     ## x dplyr::lag()    masks stats::lag()
 
@@ -44,13 +44,13 @@ glimpse(flow_sample)
 
     ## Rows: 218
     ## Columns: 7
-    ## $ station_id   <chr> "05BB001", "05BB001", "05BB001", "05BB001", "05BB001", "0~
-    ## $ year         <dbl> 1909, 1910, 1911, 1912, 1913, 1914, 1915, 1916, 1917, 191~
-    ## $ extreme_type <chr> "maximum", "maximum", "maximum", "maximum", "maximum", "m~
-    ## $ month        <dbl> 7, 6, 6, 8, 6, 6, 6, 6, 6, 6, 6, 7, 6, 6, 6, 7, 5, 7, 6, ~
-    ## $ day          <dbl> 7, 12, 14, 25, 11, 18, 27, 20, 17, 15, 22, 3, 9, 5, 14, 5~
-    ## $ flow         <dbl> 314, 230, 264, 174, 232, 214, 236, 309, 174, 345, 185, 24~
-    ## $ sym          <chr> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N~
+    ## $ station_id   <chr> "05BB001", "05BB001", "05BB001", "05BB001", "05BB001", "0…
+    ## $ year         <dbl> 1909, 1910, 1911, 1912, 1913, 1914, 1915, 1916, 1917, 191…
+    ## $ extreme_type <chr> "maximum", "maximum", "maximum", "maximum", "maximum", "m…
+    ## $ month        <dbl> 7, 6, 6, 8, 6, 6, 6, 6, 6, 6, 6, 7, 6, 6, 6, 7, 5, 7, 6, …
+    ## $ day          <dbl> 7, 12, 14, 25, 11, 18, 27, 20, 17, 15, 22, 3, 9, 5, 14, 5…
+    ## $ flow         <dbl> 314, 230, 264, 174, 232, 214, 236, 309, 174, 345, 185, 24…
+    ## $ sym          <chr> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
 
 ``` r
 #Function used to open the data in the RStudio Data Window
@@ -66,7 +66,7 @@ class(flow_sample)
 head(flow_sample)
 ```
 
-    ## # A tibble: 6 x 7
+    ## # A tibble: 6 × 7
     ##   station_id  year extreme_type month   day  flow sym  
     ##   <chr>      <dbl> <chr>        <dbl> <dbl> <dbl> <chr>
     ## 1 05BB001     1909 maximum          7     7   314 <NA> 
@@ -105,38 +105,38 @@ glimpse(cancer_sample)
 
     ## Rows: 569
     ## Columns: 32
-    ## $ ID                      <dbl> 842302, 842517, 84300903, 84348301, 84358402, ~
-    ## $ diagnosis               <chr> "M", "M", "M", "M", "M", "M", "M", "M", "M", "~
-    ## $ radius_mean             <dbl> 17.990, 20.570, 19.690, 11.420, 20.290, 12.450~
-    ## $ texture_mean            <dbl> 10.38, 17.77, 21.25, 20.38, 14.34, 15.70, 19.9~
-    ## $ perimeter_mean          <dbl> 122.80, 132.90, 130.00, 77.58, 135.10, 82.57, ~
-    ## $ area_mean               <dbl> 1001.0, 1326.0, 1203.0, 386.1, 1297.0, 477.1, ~
-    ## $ smoothness_mean         <dbl> 0.11840, 0.08474, 0.10960, 0.14250, 0.10030, 0~
-    ## $ compactness_mean        <dbl> 0.27760, 0.07864, 0.15990, 0.28390, 0.13280, 0~
-    ## $ concavity_mean          <dbl> 0.30010, 0.08690, 0.19740, 0.24140, 0.19800, 0~
-    ## $ concave_points_mean     <dbl> 0.14710, 0.07017, 0.12790, 0.10520, 0.10430, 0~
-    ## $ symmetry_mean           <dbl> 0.2419, 0.1812, 0.2069, 0.2597, 0.1809, 0.2087~
-    ## $ fractal_dimension_mean  <dbl> 0.07871, 0.05667, 0.05999, 0.09744, 0.05883, 0~
-    ## $ radius_se               <dbl> 1.0950, 0.5435, 0.7456, 0.4956, 0.7572, 0.3345~
-    ## $ texture_se              <dbl> 0.9053, 0.7339, 0.7869, 1.1560, 0.7813, 0.8902~
-    ## $ perimeter_se            <dbl> 8.589, 3.398, 4.585, 3.445, 5.438, 2.217, 3.18~
-    ## $ area_se                 <dbl> 153.40, 74.08, 94.03, 27.23, 94.44, 27.19, 53.~
-    ## $ smoothness_se           <dbl> 0.006399, 0.005225, 0.006150, 0.009110, 0.0114~
-    ## $ compactness_se          <dbl> 0.049040, 0.013080, 0.040060, 0.074580, 0.0246~
-    ## $ concavity_se            <dbl> 0.05373, 0.01860, 0.03832, 0.05661, 0.05688, 0~
-    ## $ concave_points_se       <dbl> 0.015870, 0.013400, 0.020580, 0.018670, 0.0188~
-    ## $ symmetry_se             <dbl> 0.03003, 0.01389, 0.02250, 0.05963, 0.01756, 0~
-    ## $ fractal_dimension_se    <dbl> 0.006193, 0.003532, 0.004571, 0.009208, 0.0051~
-    ## $ radius_worst            <dbl> 25.38, 24.99, 23.57, 14.91, 22.54, 15.47, 22.8~
-    ## $ texture_worst           <dbl> 17.33, 23.41, 25.53, 26.50, 16.67, 23.75, 27.6~
-    ## $ perimeter_worst         <dbl> 184.60, 158.80, 152.50, 98.87, 152.20, 103.40,~
-    ## $ area_worst              <dbl> 2019.0, 1956.0, 1709.0, 567.7, 1575.0, 741.6, ~
-    ## $ smoothness_worst        <dbl> 0.1622, 0.1238, 0.1444, 0.2098, 0.1374, 0.1791~
-    ## $ compactness_worst       <dbl> 0.6656, 0.1866, 0.4245, 0.8663, 0.2050, 0.5249~
-    ## $ concavity_worst         <dbl> 0.71190, 0.24160, 0.45040, 0.68690, 0.40000, 0~
-    ## $ concave_points_worst    <dbl> 0.26540, 0.18600, 0.24300, 0.25750, 0.16250, 0~
-    ## $ symmetry_worst          <dbl> 0.4601, 0.2750, 0.3613, 0.6638, 0.2364, 0.3985~
-    ## $ fractal_dimension_worst <dbl> 0.11890, 0.08902, 0.08758, 0.17300, 0.07678, 0~
+    ## $ ID                      <dbl> 842302, 842517, 84300903, 84348301, 84358402, …
+    ## $ diagnosis               <chr> "M", "M", "M", "M", "M", "M", "M", "M", "M", "…
+    ## $ radius_mean             <dbl> 17.990, 20.570, 19.690, 11.420, 20.290, 12.450…
+    ## $ texture_mean            <dbl> 10.38, 17.77, 21.25, 20.38, 14.34, 15.70, 19.9…
+    ## $ perimeter_mean          <dbl> 122.80, 132.90, 130.00, 77.58, 135.10, 82.57, …
+    ## $ area_mean               <dbl> 1001.0, 1326.0, 1203.0, 386.1, 1297.0, 477.1, …
+    ## $ smoothness_mean         <dbl> 0.11840, 0.08474, 0.10960, 0.14250, 0.10030, 0…
+    ## $ compactness_mean        <dbl> 0.27760, 0.07864, 0.15990, 0.28390, 0.13280, 0…
+    ## $ concavity_mean          <dbl> 0.30010, 0.08690, 0.19740, 0.24140, 0.19800, 0…
+    ## $ concave_points_mean     <dbl> 0.14710, 0.07017, 0.12790, 0.10520, 0.10430, 0…
+    ## $ symmetry_mean           <dbl> 0.2419, 0.1812, 0.2069, 0.2597, 0.1809, 0.2087…
+    ## $ fractal_dimension_mean  <dbl> 0.07871, 0.05667, 0.05999, 0.09744, 0.05883, 0…
+    ## $ radius_se               <dbl> 1.0950, 0.5435, 0.7456, 0.4956, 0.7572, 0.3345…
+    ## $ texture_se              <dbl> 0.9053, 0.7339, 0.7869, 1.1560, 0.7813, 0.8902…
+    ## $ perimeter_se            <dbl> 8.589, 3.398, 4.585, 3.445, 5.438, 2.217, 3.18…
+    ## $ area_se                 <dbl> 153.40, 74.08, 94.03, 27.23, 94.44, 27.19, 53.…
+    ## $ smoothness_se           <dbl> 0.006399, 0.005225, 0.006150, 0.009110, 0.0114…
+    ## $ compactness_se          <dbl> 0.049040, 0.013080, 0.040060, 0.074580, 0.0246…
+    ## $ concavity_se            <dbl> 0.05373, 0.01860, 0.03832, 0.05661, 0.05688, 0…
+    ## $ concave_points_se       <dbl> 0.015870, 0.013400, 0.020580, 0.018670, 0.0188…
+    ## $ symmetry_se             <dbl> 0.03003, 0.01389, 0.02250, 0.05963, 0.01756, 0…
+    ## $ fractal_dimension_se    <dbl> 0.006193, 0.003532, 0.004571, 0.009208, 0.0051…
+    ## $ radius_worst            <dbl> 25.38, 24.99, 23.57, 14.91, 22.54, 15.47, 22.8…
+    ## $ texture_worst           <dbl> 17.33, 23.41, 25.53, 26.50, 16.67, 23.75, 27.6…
+    ## $ perimeter_worst         <dbl> 184.60, 158.80, 152.50, 98.87, 152.20, 103.40,…
+    ## $ area_worst              <dbl> 2019.0, 1956.0, 1709.0, 567.7, 1575.0, 741.6, …
+    ## $ smoothness_worst        <dbl> 0.1622, 0.1238, 0.1444, 0.2098, 0.1374, 0.1791…
+    ## $ compactness_worst       <dbl> 0.6656, 0.1866, 0.4245, 0.8663, 0.2050, 0.5249…
+    ## $ concavity_worst         <dbl> 0.71190, 0.24160, 0.45040, 0.68690, 0.40000, 0…
+    ## $ concave_points_worst    <dbl> 0.26540, 0.18600, 0.24300, 0.25750, 0.16250, 0…
+    ## $ symmetry_worst          <dbl> 0.4601, 0.2750, 0.3613, 0.6638, 0.2364, 0.3985…
+    ## $ fractal_dimension_worst <dbl> 0.11890, 0.08902, 0.08758, 0.17300, 0.07678, 0…
 
 ``` r
 tibble::view(cancer_sample)
@@ -149,7 +149,7 @@ class(cancer_sample)
 head(cancer_sample)
 ```
 
-    ## # A tibble: 6 x 32
+    ## # A tibble: 6 × 32
     ##         ID diagnosis radius_mean texture_mean perimeter_mean area_mean
     ##      <dbl> <chr>           <dbl>        <dbl>          <dbl>     <dbl>
     ## 1   842302 M                18.0         10.4          123.      1001 
@@ -158,13 +158,13 @@ head(cancer_sample)
     ## 4 84348301 M                11.4         20.4           77.6      386.
     ## 5 84358402 M                20.3         14.3          135.      1297 
     ## 6   843786 M                12.4         15.7           82.6      477.
-    ## # ... with 26 more variables: smoothness_mean <dbl>, compactness_mean <dbl>,
+    ## # … with 26 more variables: smoothness_mean <dbl>, compactness_mean <dbl>,
     ## #   concavity_mean <dbl>, concave_points_mean <dbl>, symmetry_mean <dbl>,
     ## #   fractal_dimension_mean <dbl>, radius_se <dbl>, texture_se <dbl>,
     ## #   perimeter_se <dbl>, area_se <dbl>, smoothness_se <dbl>,
     ## #   compactness_se <dbl>, concavity_se <dbl>, concave_points_se <dbl>,
     ## #   symmetry_se <dbl>, fractal_dimension_se <dbl>, radius_worst <dbl>,
-    ## #   texture_worst <dbl>, perimeter_worst <dbl>, area_worst <dbl>, ...
+    ## #   texture_worst <dbl>, perimeter_worst <dbl>, area_worst <dbl>, …
 
 ``` r
 summary(cancer_sample)
@@ -234,26 +234,26 @@ glimpse(vancouver_trees)
 
     ## Rows: 146,611
     ## Columns: 20
-    ## $ tree_id            <dbl> 149556, 149563, 149579, 149590, 149604, 149616, 149~
-    ## $ civic_number       <dbl> 494, 450, 4994, 858, 5032, 585, 4909, 4925, 4969, 7~
-    ## $ std_street         <chr> "W 58TH AV", "W 58TH AV", "WINDSOR ST", "E 39TH AV"~
-    ## $ genus_name         <chr> "ULMUS", "ZELKOVA", "STYRAX", "FRAXINUS", "ACER", "~
-    ## $ species_name       <chr> "AMERICANA", "SERRATA", "JAPONICA", "AMERICANA", "C~
-    ## $ cultivar_name      <chr> "BRANDON", NA, NA, "AUTUMN APPLAUSE", NA, "CHANTICL~
-    ## $ common_name        <chr> "BRANDON ELM", "JAPANESE ZELKOVA", "JAPANESE SNOWBE~
-    ## $ assigned           <chr> "N", "N", "N", "Y", "N", "N", "N", "N", "N", "N", "~
-    ## $ root_barrier       <chr> "N", "N", "N", "N", "N", "N", "N", "N", "N", "N", "~
-    ## $ plant_area         <chr> "N", "N", "4", "4", "4", "B", "6", "6", "3", "3", "~
-    ## $ on_street_block    <dbl> 400, 400, 4900, 800, 5000, 500, 4900, 4900, 4900, 7~
-    ## $ on_street          <chr> "W 58TH AV", "W 58TH AV", "WINDSOR ST", "E 39TH AV"~
-    ## $ neighbourhood_name <chr> "MARPOLE", "MARPOLE", "KENSINGTON-CEDAR COTTAGE", "~
-    ## $ street_side_name   <chr> "EVEN", "EVEN", "EVEN", "EVEN", "EVEN", "ODD", "ODD~
-    ## $ height_range_id    <dbl> 2, 4, 3, 4, 2, 2, 3, 3, 2, 2, 2, 5, 3, 2, 2, 2, 2, ~
-    ## $ diameter           <dbl> 10.00, 10.00, 4.00, 18.00, 9.00, 5.00, 15.00, 14.00~
-    ## $ curb               <chr> "N", "N", "Y", "Y", "Y", "Y", "Y", "Y", "Y", "Y", "~
-    ## $ date_planted       <date> 1999-01-13, 1996-05-31, 1993-11-22, 1996-04-29, 19~
-    ## $ longitude          <dbl> -123.1161, -123.1147, -123.0846, -123.0870, -123.08~
-    ## $ latitude           <dbl> 49.21776, 49.21776, 49.23938, 49.23469, 49.23894, 4~
+    ## $ tree_id            <dbl> 149556, 149563, 149579, 149590, 149604, 149616, 149…
+    ## $ civic_number       <dbl> 494, 450, 4994, 858, 5032, 585, 4909, 4925, 4969, 7…
+    ## $ std_street         <chr> "W 58TH AV", "W 58TH AV", "WINDSOR ST", "E 39TH AV"…
+    ## $ genus_name         <chr> "ULMUS", "ZELKOVA", "STYRAX", "FRAXINUS", "ACER", "…
+    ## $ species_name       <chr> "AMERICANA", "SERRATA", "JAPONICA", "AMERICANA", "C…
+    ## $ cultivar_name      <chr> "BRANDON", NA, NA, "AUTUMN APPLAUSE", NA, "CHANTICL…
+    ## $ common_name        <chr> "BRANDON ELM", "JAPANESE ZELKOVA", "JAPANESE SNOWBE…
+    ## $ assigned           <chr> "N", "N", "N", "Y", "N", "N", "N", "N", "N", "N", "…
+    ## $ root_barrier       <chr> "N", "N", "N", "N", "N", "N", "N", "N", "N", "N", "…
+    ## $ plant_area         <chr> "N", "N", "4", "4", "4", "B", "6", "6", "3", "3", "…
+    ## $ on_street_block    <dbl> 400, 400, 4900, 800, 5000, 500, 4900, 4900, 4900, 7…
+    ## $ on_street          <chr> "W 58TH AV", "W 58TH AV", "WINDSOR ST", "E 39TH AV"…
+    ## $ neighbourhood_name <chr> "MARPOLE", "MARPOLE", "KENSINGTON-CEDAR COTTAGE", "…
+    ## $ street_side_name   <chr> "EVEN", "EVEN", "EVEN", "EVEN", "EVEN", "ODD", "ODD…
+    ## $ height_range_id    <dbl> 2, 4, 3, 4, 2, 2, 3, 3, 2, 2, 2, 5, 3, 2, 2, 2, 2, …
+    ## $ diameter           <dbl> 10.00, 10.00, 4.00, 18.00, 9.00, 5.00, 15.00, 14.00…
+    ## $ curb               <chr> "N", "N", "Y", "Y", "Y", "Y", "Y", "Y", "Y", "Y", "…
+    ## $ date_planted       <date> 1999-01-13, 1996-05-31, 1993-11-22, 1996-04-29, 19…
+    ## $ longitude          <dbl> -123.1161, -123.1147, -123.0846, -123.0870, -123.08…
+    ## $ latitude           <dbl> 49.21776, 49.21776, 49.23938, 49.23469, 49.23894, 4…
 
 ``` r
 tibble::view(vancouver_trees)
@@ -266,7 +266,7 @@ class(vancouver_trees)
 head(vancouver_trees)
 ```
 
-    ## # A tibble: 6 x 20
+    ## # A tibble: 6 × 20
     ##   tree_id civic_number std_street genus_name species_name cultivar_name  
     ##     <dbl>        <dbl> <chr>      <chr>      <chr>        <chr>          
     ## 1  149556          494 W 58TH AV  ULMUS      AMERICANA    BRANDON        
@@ -275,7 +275,7 @@ head(vancouver_trees)
     ## 4  149590          858 E 39TH AV  FRAXINUS   AMERICANA    AUTUMN APPLAUSE
     ## 5  149604         5032 WINDSOR ST ACER       CAMPESTRE    <NA>           
     ## 6  149616          585 W 61ST AV  PYRUS      CALLERYANA   CHANTICLEER    
-    ## # ... with 14 more variables: common_name <chr>, assigned <chr>,
+    ## # … with 14 more variables: common_name <chr>, assigned <chr>,
     ## #   root_barrier <chr>, plant_area <chr>, on_street_block <dbl>,
     ## #   on_street <chr>, neighbourhood_name <chr>, street_side_name <chr>,
     ## #   height_range_id <dbl>, diameter <dbl>, curb <chr>, date_planted <date>,
@@ -333,27 +333,27 @@ glimpse(steam_games)
 
     ## Rows: 40,833
     ## Columns: 21
-    ## $ id                       <dbl> 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14~
-    ## $ url                      <chr> "https://store.steampowered.com/app/379720/DO~
-    ## $ types                    <chr> "app", "app", "app", "app", "app", "bundle", ~
-    ## $ name                     <chr> "DOOM", "PLAYERUNKNOWN'S BATTLEGROUNDS", "BAT~
-    ## $ desc_snippet             <chr> "Now includes all three premium DLC packs (Un~
-    ## $ recent_reviews           <chr> "Very Positive,(554),- 89% of the 554 user re~
-    ## $ all_reviews              <chr> "Very Positive,(42,550),- 92% of the 42,550 u~
-    ## $ release_date             <chr> "May 12, 2016", "Dec 21, 2017", "Apr 24, 2018~
-    ## $ developer                <chr> "id Software", "PUBG Corporation", "Harebrain~
-    ## $ publisher                <chr> "Bethesda Softworks,Bethesda Softworks", "PUB~
-    ## $ popular_tags             <chr> "FPS,Gore,Action,Demons,Shooter,First-Person,~
-    ## $ game_details             <chr> "Single-player,Multi-player,Co-op,Steam Achie~
-    ## $ languages                <chr> "English,French,Italian,German,Spanish - Spai~
-    ## $ achievements             <dbl> 54, 37, 128, NA, NA, NA, 51, 55, 34, 43, 72, ~
-    ## $ genre                    <chr> "Action", "Action,Adventure,Massively Multipl~
-    ## $ game_description         <chr> "About This Game Developed by id software, th~
-    ## $ mature_content           <chr> NA, "Mature Content Description  The develope~
-    ## $ minimum_requirements     <chr> "Minimum:,OS:,Windows 7/8.1/10 (64-bit versio~
-    ## $ recommended_requirements <chr> "Recommended:,OS:,Windows 7/8.1/10 (64-bit ve~
-    ## $ original_price           <dbl> 19.99, 29.99, 39.99, 44.99, 0.00, NA, 59.99, ~
-    ## $ discount_price           <dbl> 14.99, NA, NA, NA, NA, 35.18, 70.42, 17.58, N~
+    ## $ id                       <dbl> 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14…
+    ## $ url                      <chr> "https://store.steampowered.com/app/379720/DO…
+    ## $ types                    <chr> "app", "app", "app", "app", "app", "bundle", …
+    ## $ name                     <chr> "DOOM", "PLAYERUNKNOWN'S BATTLEGROUNDS", "BAT…
+    ## $ desc_snippet             <chr> "Now includes all three premium DLC packs (Un…
+    ## $ recent_reviews           <chr> "Very Positive,(554),- 89% of the 554 user re…
+    ## $ all_reviews              <chr> "Very Positive,(42,550),- 92% of the 42,550 u…
+    ## $ release_date             <chr> "May 12, 2016", "Dec 21, 2017", "Apr 24, 2018…
+    ## $ developer                <chr> "id Software", "PUBG Corporation", "Harebrain…
+    ## $ publisher                <chr> "Bethesda Softworks,Bethesda Softworks", "PUB…
+    ## $ popular_tags             <chr> "FPS,Gore,Action,Demons,Shooter,First-Person,…
+    ## $ game_details             <chr> "Single-player,Multi-player,Co-op,Steam Achie…
+    ## $ languages                <chr> "English,French,Italian,German,Spanish - Spai…
+    ## $ achievements             <dbl> 54, 37, 128, NA, NA, NA, 51, 55, 34, 43, 72, …
+    ## $ genre                    <chr> "Action", "Action,Adventure,Massively Multipl…
+    ## $ game_description         <chr> "About This Game Developed by id software, th…
+    ## $ mature_content           <chr> NA, "Mature Content Description  The develope…
+    ## $ minimum_requirements     <chr> "Minimum:,OS:,Windows 7/8.1/10 (64-bit versio…
+    ## $ recommended_requirements <chr> "Recommended:,OS:,Windows 7/8.1/10 (64-bit ve…
+    ## $ original_price           <dbl> 19.99, 29.99, 39.99, 44.99, 0.00, NA, 59.99, …
+    ## $ discount_price           <dbl> 14.99, NA, NA, NA, NA, 35.18, 70.42, 17.58, N…
 
 ``` r
 tibble::view(steam_games)
@@ -366,16 +366,16 @@ class(steam_games)
 head(steam_games)
 ```
 
-    ## # A tibble: 6 x 21
+    ## # A tibble: 6 × 21
     ##      id url    types  name  desc_snippet recent_reviews all_reviews release_date
     ##   <dbl> <chr>  <chr>  <chr> <chr>        <chr>          <chr>       <chr>       
-    ## 1     1 https~ app    DOOM  Now include~ Very Positive~ Very Posit~ May 12, 2016
-    ## 2     2 https~ app    PLAY~ PLAYERUNKNO~ Mixed,(6,214)~ Mixed,(836~ Dec 21, 2017
-    ## 3     3 https~ app    BATT~ Take comman~ Mixed,(166),-~ Mostly Pos~ Apr 24, 2018
-    ## 4     4 https~ app    DayZ  The post-so~ Mixed,(932),-~ Mixed,(167~ Dec 13, 2018
-    ## 5     5 https~ app    EVE ~ EVE Online ~ Mixed,(287),-~ Mostly Pos~ May 6, 2003 
-    ## 6     6 https~ bundle Gran~ Grand Theft~ NaN            NaN         NaN         
-    ## # ... with 13 more variables: developer <chr>, publisher <chr>,
+    ## 1     1 https… app    DOOM  Now include… Very Positive… Very Posit… May 12, 2016
+    ## 2     2 https… app    PLAY… PLAYERUNKNO… Mixed,(6,214)… Mixed,(836… Dec 21, 2017
+    ## 3     3 https… app    BATT… Take comman… Mixed,(166),-… Mostly Pos… Apr 24, 2018
+    ## 4     4 https… app    DayZ  The post-so… Mixed,(932),-… Mixed,(167… Dec 13, 2018
+    ## 5     5 https… app    EVE … EVE Online … Mixed,(287),-… Mostly Pos… May 6, 2003 
+    ## 6     6 https… bundle Gran… Grand Theft… NaN            NaN         NaN         
+    ## # … with 13 more variables: developer <chr>, publisher <chr>,
     ## #   popular_tags <chr>, game_details <chr>, languages <chr>,
     ## #   achievements <dbl>, genre <chr>, game_description <chr>,
     ## #   mature_content <chr>, minimum_requirements <chr>,
@@ -436,41 +436,46 @@ summary(steam_games)
 
 ## 1.3
 
-By analyzing the content of the tibbles I chose the following data sets
-*1. Flow sample* *2. Cancer sample*
+By analyzing the content of the tibbles I choose the following data sets
 
-**Flow\_sample** seems a very simple data set, however it has both
+*1. Flow sample*
+
+*2. Cancer sample*
+
+**Flow_sample** seems a very simple data set, however it has both
 quantitative and qualitative variables that can be used to group the
-information according to the content of the rows. Also, a lot of
+information according to the content of the rows. Also a lot of
 information can be obtained from it, for example knowing in which month
 more flow is produced.
 
-**Cancer\_sample** I liked this data set because I am pretty
-familiarized with it, since my research is related to bladder cancer
-patients. Moreover, I have more experience working with quantitative
-data, because exact conclusions can be obtained from it. I would like to
-know if there is some relationship between the characteristic of the
-nuclei from the breast biopsy and the diagnosis.
+**Cancer_sample** I liked this data set because I am pretty familiarized
+with it, since my research is related to bladder cancer patients.
+Moreover, I have more experience working with quantitative data, because
+exact conclusions can be obtained from it. I would like to know if there
+is some relationship between the characteristic of the nuclei from the
+breast biopsy and the diagnosis.
 
 ## 1.4
 
-Research questions related to each data set **Flow sample** *Is there a
-relationship between the flow and the month of the year?*
+Research questions related to each data set:
 
-**Cancer\_sample** *Is there a relationship between the diagnosis and
-the area of the nuclei in the biopsy?*
+**Flow sample** *Is there a relationship with the flow and the month of
+the year?*
 
-**Final choice: Cancer\_sample**
+**Cancer_sample** *Is there a relationship between the diagnosis and the
+area of the nuclei in the biopsy?*
+
+**Final choice: Cancer_sample**
 
 # Task 2: Exploring your dataset
 
 Exploration of the data set using dplyr and ggplot to get to know more
-the variables in the tibble *Cancer\_samples*
+the variables in the tibble *Cancer_samples*
 
-First of all, a brief introduction of the data set. *Cancer\_samples*
-was obtained from the UCI Machine Learning Repository and it contains
+First of all, a brief introduction of the data set. *Cancer_samples* was
+obtained from the UCI Machine Learning Repository and it contains
 information about the cell nuclei in the biopsy of a breast cancer mass
-obtained with fine needle aspirate (FNA) and analyzed through machine
+obtained with fine needle aspirate (FNA) and analysed trough machine
 learning using digitized imaging. It contains the ID of the patient and
 the diagnosis B: benign tumor and M= malign tumor.
 
@@ -491,26 +496,26 @@ variable:
 
 Moreover, a brief explanation of ggplot. It is a package that can be
 loaded in R studio used to generate different type of graphs. The first
-argument is always the tibble where your data set is stored, then you
+argument is always the tibble where your data set is store, then you
 will set the aesthetic mapping (with aes()), the first two variables are
 the x and the y axis, then you can add parameters like color and fill
 that are related to your variables. You then add on layers named geoms
-(like geom\_point() or geom\_histogram()), inside this layers you can
-also specify constant parameters such as width, color and fill.
+(like geom_point() or geom_histogram()), inside this layers you can also
+specify constant parameters such as width, color and fill.
 
 Another package I used is called dplyr, is for data manipulation,
 allowing you to add new variables (mutate), select a set of columns by
 their names (select), filter some rows (filter), reduce multiple
 variables into a summary (summaries) etc..
 
-“%in%” Is used instead of “==” " %&gt;% " Is for pipping and is used to
-nest functions “&lt;-” is used to assign a function to a variable
-“print” is used to print the variable in the r console
+“%in%” Is used instead of “==” ” %>% ” Is for pipping and is used to
+nest functions “\<-” is used to assign a function to a variable “print”
+is used to print the variable in the r console
 
 ### First excercise
 
 To get to know better the data set I will make a bar graph that counts
-the amount of patients diagnosed with a benign and malign tumor.
+the amount of patients diagnose with a benign and malign tumor.
 Furthermore, I will analyze the **distribution** of the perimeter (um)
 of the nuclei in the different biopsies, to see how much variability the
 data set has and if is worth comparing it with other variables
@@ -541,7 +546,7 @@ print(Ex1.1)
 Explore the **relationship between 2 variables** in a plot.I wanted to
 know if there is a relationship between the perimeter of the nuclei and
 the concavity.Since larger cells (with bigger perimeter) tend to have
-more concave portions of the contour. I grouped the plot by diagnosis to
+more concave portions of the contour. I group the plot by diagnosis to
 see the variability within each group or if it has some distinguish
 characteristics.
 
@@ -582,10 +587,7 @@ print(Ex3.2)
 ```
 
 ![](Milestone-1-Luque_files/figure-gfm/unnamed-chunk-5-2.png)<!-- -->
-
-### Forth exercise
-
-I want to know the mean values for the two
+### Forth excercise I want to know the mean values for the two
 diagnostic groups, to analyze which variables are clues in detecting
 malign and benign tumors or if there is any difference between the two
 groups. Moreover, the standard deviation can be used to know the
@@ -601,21 +603,23 @@ my data**.
 
 Ex4 <- cancer_sample %>%
   group_by(diagnosis) %>%
-  summarise_at(vars(texture_mean:concavity_mean), mean) %>%
+  summarise_at(vars(texture_mean:symmetry_mean), mean) %>%
                pivot_longer(cols = -diagnosis, names_to = 'Diagnosis') %>% 
                pivot_wider(names_from = diagnosis, values_from = value) %>%                      mutate(across(where(is.numeric), ~ round(., 3)))
 Ex4
 ```
 
-    ## # A tibble: 6 x 3
-    ##   Diagnosis              B       M
-    ##   <chr>              <dbl>   <dbl>
-    ## 1 texture_mean      17.9    21.6  
-    ## 2 perimeter_mean    78.1   115.   
-    ## 3 area_mean        463.    978.   
-    ## 4 smoothness_mean    0.092   0.103
-    ## 5 compactness_mean   0.08    0.145
-    ## 6 concavity_mean     0.046   0.161
+    ## # A tibble: 8 × 3
+    ##   Diagnosis                 B       M
+    ##   <chr>                 <dbl>   <dbl>
+    ## 1 texture_mean         17.9    21.6  
+    ## 2 perimeter_mean       78.1   115.   
+    ## 3 area_mean           463.    978.   
+    ## 4 smoothness_mean       0.092   0.103
+    ## 5 compactness_mean      0.08    0.145
+    ## 6 concavity_mean        0.046   0.161
+    ## 7 concave_points_mean   0.026   0.088
+    ## 8 symmetry_mean         0.174   0.193
 
 # Task 3: Research questions
 
