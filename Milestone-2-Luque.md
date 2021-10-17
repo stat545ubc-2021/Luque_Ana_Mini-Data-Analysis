@@ -1,7 +1,7 @@
 Milestone-2-Luque.Rmd
 ================
 Ana Luque
-October 16, 2021
+October 19, 2021
 
 Loading the packages:
 
@@ -39,7 +39,7 @@ library(scales) #provides the internal scaling infrastructure used by ggplot2
 
 ``` r
 library(broom) #provides the infomration of a model in a tibble
-library(ggpubr) #package that allows you to combine multiple ggplots in one graph
+library(ggpubr) #package that allows you to combine multiple plots in one graph
 theme_set(theme_pubr()) #Default function theme_pubr that creates a publication ready theme
 ```
 

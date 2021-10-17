@@ -13,7 +13,7 @@ library(datateachr) #contains the cancer_sample data set I am working
 library(tidyverse) #packages that allows to analyze data(tibble)
 library(scales) #provides the internal scaling infrastructure used by ggplot2
 library(broom) #provides the infomration of a model in a tibble
-library(ggpubr) #package that allows you to combine multiple ggplots in one graph
+library(ggpubr) #package that allows you to combine multiple plots in one graph
 theme_set(theme_pubr()) #Default function theme_pubr that creates a publication ready theme
 ```
 
