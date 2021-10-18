@@ -3,7 +3,7 @@
     "path": "~/Documents/1. UBC/STAT545/Collaborative/Luque_Ana_Mini-Data-Analysis/Milestone-2-Luque.Rmd",
     "project_path": "Milestone-2-Luque.Rmd",
     "type": "r_markdown",
-    "hash": "269324511",
+    "hash": "0",
     "contents": "",
     "dirty": false,
     "created": 1634495319442.0,
@@ -12,8 +12,8 @@
     "properties": {
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "14,54",
-        "scrollLine": "0"
+        "cursorPosition": "191,54",
+        "scrollLine": "175"
     },
     "folds": "",
     "lastKnownWriteTime": 1634495750,
