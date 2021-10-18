@@ -14,7 +14,7 @@ Dplyr is used for data manipulation, allowing you to add new variables (mutate),
 "<-" is used to assign a function to a variable.
 "print" is used to print the variable in the r console.
 
-:bookmark_tabs: *Milestone 1*
+:pencil2: *Milestone 1*
 Different data sets were presented and one had to be chosen to make four research questions.
 The chosen data set was **Cancer_samples**. It was obtained from the UCI Machine Learning Repository and it contains information about the cell nuclei in the biopsy of a breast cancer mass obtained with fine needle aspirate (FNA) and analyzed through machine learning using digitized imaging. 
 
@@ -34,7 +34,7 @@ It has the mean, standard error (se), and worst (max) values of each variable:
 * fractal dimension ("coastline approximation" - 1)
 
 
-:bookmark_tabs: *Milestone 2*
+:pencil2: *Milestone 2*
 The main objective of analyzing this data set is to determine which variables can be used to diagnose tumors by imaging analysis of nuclei from biopsies, and the main differences between de nuclei of benign and malign tumors, Using ggplot2 and dyplyr packages the follwing research questions were analyzed.
 
 1. Is there a difference within the area of the nuclei of benign and malign tumors?
