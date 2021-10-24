@@ -234,12 +234,12 @@ dir(here::here("Output")) #To know the location of the file
 The linear model showing the relationship between the area and the perimeter of the nuclei of malign tumors will be saved to an R binary file (an RDS). The the model can be loaded again into a new variable
 ```{r}
 #SaveRDS need the name of the model, the location where it will be saved and the name of the new file
-saveRDS(T2.2, here::here("Output", "lm_model.rds"))
+saveRDS(T2.2, here::here("Output", "model.rds"))
 dir(here::here("Output"))
 
 #The model will be loaded and save into a new variable called T3.2
 #ReadRDS needs the location and name of the file 
-T3.2 <- readRDS(here::here("output", "lm_model.rds"))
+T3.2 <- readRDS(here::here("output", "model.rds"))
 T3.2
 ```
 
