@@ -13,6 +13,7 @@ library(datateachr) #contains the cancer_sample data set I am working with.
 library(tidyverse) #packages that allows to analyze data(tibble).
 library(forcats) #package that helps analyzing factors.
 library(broom) #provides the information of a model in a tibble.
+library(here) #to create CSV files from tibbles
 ```
 # Introduction to the file
 During Milestone 3, I will be working with the data set: **Cancer_samples**. This tibble was obtained from the UCI Machine Learning Repository and it contains information about the cell nuclei in the biopsy of a breast cancer mass obtained with fine needle aspirate (FNA) and analyzed through machine learning using digitized imaging. For more information about the data set the README file on the Github repository can be consulted.
@@ -199,4 +200,32 @@ Finally, the model was used to predict the perimeter based on the are of the nuc
 
 # Task 3: Reading and writing data
 
+## 3.1
+A CSV will be created from a table done in Milestone 2, Task 1.2, Research question 1. 
+
+```{r}
+#Group_by is used to create a grouped tibble so that the rest of the functions are perform in every group, in this case in both benign and malign tumors, and the results are shown separately.
+#Arrange order the rows of a data frame in ascending order.
+#Summarise allows you to create new columns of summarized variables, giving one row per group. It can be used to calculate summary statistics
+#n() functions will count the number of rows in a group and will give the amount of benign and malign samples
+#Mutate is used to create new variables using the existing variables, in this case is used in all numeric values to round up to one decimal
+T3.0 <- cancer_sample %>%
+  group_by(diagnosis) %>%
+  arrange(area_mean)  %>%
+  summarise(Mean_area = mean(area_mean),
+            SD_area = sd(area_mean),
+            Min_area = min(area_mean),
+            Median_area = median(area_mean),
+            Max_area = max(area_mean), n=n()) %>%
+  mutate(across(where(is.numeric), ~ round(., 1)))
+T3.0
+
+
+#Write_csv is a function used to convert the tibble (write) into a comma-separated value (csv) file 
+#The name of the folder where it will be located and the name of the new file is specified in quotations 
+#Here function from the Here package allow you to locate where the RMD file is located
+#The quotations are used to specify the name of the folder where the file will be saved
+write_csv(T3.0, here("Output", "Area_tumors_exported_file.csv"))
+dir(here::here("Output"))
+```
 
