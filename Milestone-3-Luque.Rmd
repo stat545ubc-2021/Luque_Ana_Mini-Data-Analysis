@@ -209,7 +209,7 @@ A CSV will be created from a table done in Milestone 2, Task 1.2, Research quest
 #Summarise allows you to create new columns of summarized variables, giving one row per group. It can be used to calculate summary statistics
 #n() functions will count the number of rows in a group and will give the amount of benign and malign samples
 #Mutate is used to create new variables using the existing variables, in this case is used in all numeric values to round up to one decimal
-T3.0 <- cancer_sample %>%
+T3.1 <- cancer_sample %>%
   group_by(diagnosis) %>%
   arrange(area_mean)  %>%
   summarise(Mean_area = mean(area_mean),
@@ -218,14 +218,28 @@ T3.0 <- cancer_sample %>%
             Median_area = median(area_mean),
             Max_area = max(area_mean), n=n()) %>%
   mutate(across(where(is.numeric), ~ round(., 1)))
-T3.0
+T3.1
 
 
 #Write_csv is a function used to convert the tibble (write) into a comma-separated value (csv) file 
 #The name of the folder where it will be located and the name of the new file is specified in quotations 
 #Here function from the Here package allow you to locate where the RMD file is located
 #The quotations are used to specify the name of the folder where the file will be saved
-write_csv(T3.0, here("Output", "Area_tumors_exported_file.csv"))
+write_csv(T3.1, here("Output", "Area_tumors_exported_file.csv"))
+dir(here::here("Output")) #To know the location of the file
+```
+
+## 3.2
+
+The linear model showing the relationship between the area and the perimeter of the nuclei of malign tumors will be saved to an R binary file (an RDS). The the model can be loaded again into a new variable
+```{r}
+#SaveRDS need the name of the model, the location where it will be saved and the name of the new file
+saveRDS(T2.2, here::here("output", "lm_model.rds"))
 dir(here::here("Output"))
+
+#The model will be loaded and save into a new variable called T3.2
+#ReadRDS needs the location and name of the file 
+T3.2 <- readRDS(here::here("output", "lm_model.rds"))
+T3.2
 ```
 

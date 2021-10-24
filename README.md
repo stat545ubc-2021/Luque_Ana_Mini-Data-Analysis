@@ -35,7 +35,7 @@ It has the mean, standard error (se), and worst (max) values of each variable:
 
 
 :pencil2: *Milestone 2*
-The main objective of analyzing this data set is to determine which variables can be used to diagnose tumors by imaging analysis of nuclei from biopsies, and the main differences between de nuclei of benign and malign tumors, Using ggplot2 and dyplyr packages the follwing research questions were analyzed.
+The main objective of analyzing this data set is to determine which variables can be used to diagnose tumors by imaging analysis of nuclei from biopsies, and the main differences between de nuclei of benign and malign tumors, Using ggplot2 and dyplyr packages the following research questions were analyzed.
 
 1. Is there a difference within the area of the nuclei of benign and malign tumors?
 2. Do malign tumors have more variability in smoothness in their nuclei than benign tumors?
@@ -43,5 +43,15 @@ The main objective of analyzing this data set is to determine which variables ca
 4. Is there a relationship between the symmetry of the nuclei and the compactness in malign tumors? 
 
 Furthermore, an exploration about tidy and untidy data was made.
+
+:pencil2: *Milestone 3*
+
+In this file two research questions were chosen to sharpen the results. The main intention of this milestone is manipulating special data types specifically factors. Moreover a linear model was created between two variables. Later on the model was used to make predictions in both malign and benign samples.  
+Finally a CSV file was created from a summary table, the function here::here was used to save the file in a specific location within the project repository. The model was saved in a RDS file, making it possible to load it again from any other RMD file.  
+
+The following research questions were analyzed.
+
+1. Could it be possible to diagnose the tumor of a patient just by looking at the concavity of the nuclei?
+2. Is there a relationship between the area of the nuclei and the perimeter in malign tumors?
 
 
