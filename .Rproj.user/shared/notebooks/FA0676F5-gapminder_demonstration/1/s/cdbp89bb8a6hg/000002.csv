@@ -1,0 +1,19 @@
+"0","country_data <- country_data %>% "
+"0","  select(name, income_groups, g77_and_oecd_countries, main_religion_2008)"
+"0","# Check data structure"
+"0","glimpse(country_data)"
+"1","Rows: 273"
+"1",""
+"1","
+"
+"1","Columns: 4"
+"1",""
+"1","
+"
+"1","$ name                   [3m[38;5;246m<chr>[39m[23m ""Abkhazia"", ""Afghanistan"", ""Akrotiri and Dhekelia"", ""Åland""…
+$ income_groups          [3m[38;5;246m<chr>[39m[23m """", ""low_income"", """", """", ""upper_middle_income"", ""upper_mid…
+$ g77_and_oecd_countries [3m[38;5;246m<chr>[39m[23m ""others"", ""g77"", ""others"", ""others"", ""others"", ""g77"", ""othe…
+$ main_religion_2008     [3m[38;5;246m<chr>[39m[23m """", ""muslim"", """", """", ""muslim"", ""muslim"", ""christian"", ""chr…"
+"1",""
+"1","
+"

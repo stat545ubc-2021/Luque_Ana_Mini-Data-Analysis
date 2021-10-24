@@ -1,0 +1,3 @@
+"0","gapminder_extended <- left_join(gapminder, country_data, "
+"0","                                by = c(""country"" = ""name""))"
+"0","head(gapminder_extended)"

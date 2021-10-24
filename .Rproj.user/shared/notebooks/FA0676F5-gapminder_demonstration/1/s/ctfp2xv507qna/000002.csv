@@ -1,0 +1,7 @@
+"0","gapminder_extended %>% "
+"0","  filter(main_religion_2008 %in% c(""christian"",""eastern_religions"",""muslim"")) %>% "
+"0","  ggplot(aes(x = g77_and_oecd_countries,y = lifeExp)) +"
+"0","    geom_boxplot() +"
+"0","    geom_jitter(aes(color = continent), alpha = 0.3) +"
+"0","    labs(x = ""Country group"") +"
+"0","    facet_wrap(~main_religion_2008)"
