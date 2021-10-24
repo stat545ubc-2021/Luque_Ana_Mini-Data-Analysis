@@ -187,7 +187,7 @@ T2.3
 
 ```
 
-*Analaysis*
+*Analysis*
 
 Viewing the scatter plot from T2.0 it can be seen that there is a linear relation ship between the area and the perimeter of the nuclei in both benign and malign tumors, therefore the linear model function can be used. Nevertheless the groups (marked with different colors) have different slopes, so it would not be appropriate to use the same model for both groups. To use a model juts for malign tumors a new tibble needs to be created and is the one in T2.1. The model just show the coefficients and intercepts (the equation), but with that information you cannot know if it is a good fit. 
 
