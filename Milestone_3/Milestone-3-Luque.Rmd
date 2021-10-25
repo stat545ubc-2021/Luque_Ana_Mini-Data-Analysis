@@ -95,6 +95,7 @@ print(T1.5)
 ```
 
 *Analysis*
+
 By analyzing just the grouped means it is obvious that there is a clear difference between the two groups, being the average concavity of malign tumors around 350 times bigger than the benign samples.The T1.5 graph is ordered by ascending concavity, in that way it is easier to detect that the only samples that do not have concavity portions are benign tumors and that most of their samples are in the normal category. Nevertheless, there is presence of benign samples in both high and very high categories making it impossible to diagnose a tumor just by it's concavity. 
 
 ## Grouping some factor levels 
@@ -116,6 +117,7 @@ ggplot(aes(diagnosis, ..count..)) +
    geom_text(aes(label = ..count..), stat = "count", vjust = 0.1)
 print(T1.7)
 ```
+
 *Analysis*
 
 Grouping the zero and normal category makes sense because zero belongs to the normal category as well as cells with a low concavity (less than 0.1). In this new plot the 3 categories are organized in a horizontal way making it easier to see that there are more samples in the normal category and that malign tumors have a bigger representation in the categories high and very high. Meaning that malign tumors tend to have more aberrant nuclei shape with more severe concavity portions.

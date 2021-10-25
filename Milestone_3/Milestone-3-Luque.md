@@ -28,7 +28,7 @@ library(broom) #provides the information of a model in a tibble.
 library(here) #to create CSV files from tibbles
 ```
 
-    ## here() starts at /Users/anacl/Documents/1. UBC/STAT545/Collaborative/Luque_Ana_Mini-Data-Analysis
+    ## here() starts at /Users/anacl/Documents/1_UBC/STAT545/Collaborative/Luque_Ana_Mini-Data-Analysis
 
 # Introduction to the file
 
@@ -185,15 +185,17 @@ print(T1.5)
 
 ![](Milestone-3-Luque_files/figure-gfm/unnamed-chunk-2-2.png)<!-- -->
 
-*Analysis* By analyzing just the grouped means it is obvious that there
-is a clear difference between the two groups, being the average
-concavity of malign tumors around 350 times bigger than the benign
-samples.The T1.5 graph is ordered by ascending concavity, in that way it
-is easier to detect that the only samples that do not have concavity
-portions are benign tumors and that most of their samples are in the
-normal category. Nevertheless, there is presence of benign samples in
-both high and very high categories making it impossible to diagnose a
-tumor just by it’s concavity.
+*Analysis*
+
+By analyzing just the grouped means it is obvious that there is a clear
+difference between the two groups, being the average concavity of malign
+tumors around 350 times bigger than the benign samples.The T1.5 graph is
+ordered by ascending concavity, in that way it is easier to detect that
+the only samples that do not have concavity portions are benign tumors
+and that most of their samples are in the normal category. Nevertheless,
+there is presence of benign samples in both high and very high
+categories making it impossible to diagnose a tumor just by it’s
+concavity.
 
 ## Grouping some factor levels
 
@@ -239,6 +241,7 @@ print(T1.7)
 ```
 
 ![](Milestone-3-Luque_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
+
 *Analysis*
 
 Grouping the zero and normal category makes sense because zero belongs
@@ -478,7 +481,7 @@ write_csv(T3.1, here("Output", "Area_tumors_exported_file.csv"))
 dir(here::here("Output")) #To know the location of the file
 ```
 
-    ## [1] "Area_tumors_exported_file.csv" "lm_model.rds"
+    ## [1] "Area_tumors_exported_file.csv"
 
 ## 3.2
 
@@ -488,16 +491,16 @@ file (an RDS). The the model can be loaded again into a new variable
 
 ``` r
 #SaveRDS need the name of the model, the location where it will be saved and the name of the new file
-saveRDS(T2.2, here::here("output", "lm_model.rds"))
+saveRDS(T2.2, here("Output", "model.rds"))
 dir(here::here("Output"))
 ```
 
-    ## [1] "Area_tumors_exported_file.csv" "lm_model.rds"
+    ## [1] "Area_tumors_exported_file.csv" "model.rds"
 
 ``` r
 #The model will be loaded and save into a new variable called T3.2
 #ReadRDS needs the location and name of the file 
-T3.2 <- readRDS(here::here("output", "lm_model.rds"))
+T3.2 <- readRDS(here("output", "model.rds"))
 T3.2
 ```
 
