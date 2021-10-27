@@ -30,6 +30,22 @@ library(here) #to create CSV files from tibbles
 
     ## here() starts at /Users/anacl/Documents/1_UBC/STAT545/Collaborative/Luque_Ana_Mini-Data-Analysis
 
+``` r
+library(cowplot) #it contains themes to be applied in the ggplots.
+library(ggpubr) #package that allows you to combine multiple plots in one graph and set themes.
+```
+
+    ## 
+    ## Attaching package: 'ggpubr'
+
+    ## The following object is masked from 'package:cowplot':
+    ## 
+    ##     get_legend
+
+``` r
+theme_set(theme_pubr()) #Default function theme_pubr that creates a publication-ready theme.
+```
+
 # Introduction to the file
 
 During Milestone 3, I will be working with the data set:
@@ -160,11 +176,16 @@ T1.3
 
 ``` r
 # A bar graph was created using the ggplot2 package to visualize the number of samples in every category, the function ..count.. is used instead of the y axis to the bar graph, being able to show the number of samples instead of the frequencies.  
+#ylim is used to change the limit of the y axis, so the number 316 can be seen on the plot 
 # Using geom_text the exact number of every category will appear in a label at the top of the bar graph. 
+#Theme is used to change the theme of the graph
 T1.4 <- ggplot(T1.3, aes(diagnosis, ..count..)) +
+   labs(title="Concavity of the nuclei in breast tumors", y ="Number of samples ", x = "Diagnosis") +
    geom_bar(fill= "darkslategray4", alpha = 0.7, position = "dodge") +
+   ylim(0, 330) +
    facet_wrap(~ concavity) +
-   geom_text(aes(label = ..count..), stat = "count", vjust = 0.1)
+   geom_text(aes(label = ..count..), stat = "count", vjust = 0.1) +
+   theme_minimal()
 print(T1.4)
 ```
 
@@ -177,9 +198,12 @@ print(T1.4)
 T1.5 <- T1.3 %>%
 mutate(concavity= fct_inorder(concavity)) %>%
 ggplot(aes(diagnosis, ..count..)) +
+  labs(title="Concavity of the nuclei in breast tumors", y ="Number of samples ", x = "Diagnosis") +
    geom_bar(fill= "coral 1", alpha = 0.7, position = "dodge") +
+   ylim(0, 330) +
    facet_wrap(~ concavity) +
-   geom_text(aes(label = ..count..), stat = "count", vjust = 0.1)
+   geom_text(aes(label = ..count..), stat = "count", vjust = 0.1) +
+     theme_minimal() 
 print(T1.5)
 ```
 
@@ -234,9 +258,12 @@ print(T1.6)
 #A graph similar to the one in T1.5 was created using T1.6(the ordered and collapsed data set) to show that there are now 3 categories instead of 4.
 T1.7 <- T1.6 %>%
 ggplot(aes(diagnosis, ..count..)) +
+   labs(title="Concavity of the nuclei in breast tumors", y ="Number of samples ", x = "Diagnosis") +
    geom_bar(fill= "coral 1", alpha = 0.7, position = "dodge") +
    facet_wrap(~ concavity) +
-   geom_text(aes(label = ..count..), stat = "count", vjust = 0.1)
+   geom_text(aes(label = ..count..), stat = "count", vjust = 0.1) +
+    theme_minimal() 
+  
 print(T1.7)
 ```
 
@@ -288,7 +315,9 @@ deviates from the original data.
 ## The aesthetic specification can be in the ggplot function or in the geom layers, when used in the geom layers is to specify that the functions is related to variables in the data set.
 T2.0<- cancer_sample %>%
   ggplot(aes(area_mean, perimeter_mean)) + 
-  geom_point(aes(colour=diagnosis))
+  labs(title="Relationship between the area and perimeter of the nuclei in breast cancer tumors", y ="Perimeter of the nuclei (um)", x = "Area of the nuceli (um^2)") +
+  geom_point(aes(colour=diagnosis)) +
+   theme_minimal()
 T2.0
 ```
 
@@ -481,7 +510,7 @@ write_csv(T3.1, here("Output", "Area_tumors_exported_file.csv"))
 dir(here::here("Output")) #To know the location of the file
 ```
 
-    ## [1] "Area_tumors_exported_file.csv"
+    ## [1] "Area_tumors_exported_file.csv" "model.rds"
 
 ## 3.2
 

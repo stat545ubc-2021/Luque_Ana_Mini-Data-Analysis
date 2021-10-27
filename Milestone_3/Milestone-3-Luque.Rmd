@@ -14,6 +14,9 @@ library(tidyverse) #packages that allows to analyze data(tibble).
 library(forcats) #package that helps analyzing factors.
 library(broom) #provides the information of a model in a tibble.
 library(here) #to create CSV files from tibbles
+library(cowplot) #it contains themes to be applied in the ggplots.
+library(ggpubr) #package that allows you to combine multiple plots in one graph and set themes.
+theme_set(theme_pubr()) #Default function theme_pubr that creates a publication-ready theme.
 ```
 # Introduction to the file
 During Milestone 3, I will be working with the data set: **Cancer_samples**. This tibble was obtained from the UCI Machine Learning Repository and it contains information about the cell nuclei in the biopsy of a breast cancer mass obtained with fine needle aspirate (FNA) and analyzed through machine learning using digitized imaging. For more information about the data set the README file on the Github repository can be consulted.
@@ -74,11 +77,16 @@ T1.3
 
 
 # A bar graph was created using the ggplot2 package to visualize the number of samples in every category, the function ..count.. is used instead of the y axis to the bar graph, being able to show the number of samples instead of the frequencies.  
+#ylim is used to change the limit of the y axis, so the number 316 can be seen on the plot 
 # Using geom_text the exact number of every category will appear in a label at the top of the bar graph. 
+#Theme is used to change the theme of the graph
 T1.4 <- ggplot(T1.3, aes(diagnosis, ..count..)) +
+   labs(title="Concavity of the nuclei in breast tumors", y ="Number of samples ", x = "Diagnosis") +
    geom_bar(fill= "darkslategray4", alpha = 0.7, position = "dodge") +
+   ylim(0, 330) +
    facet_wrap(~ concavity) +
-   geom_text(aes(label = ..count..), stat = "count", vjust = 0.1)
+   geom_text(aes(label = ..count..), stat = "count", vjust = 0.1) +
+   theme_minimal()
 print(T1.4)
 
 #The factors will be re order so they not appear alphabetically but in ascending concavity order
@@ -87,9 +95,12 @@ print(T1.4)
 T1.5 <- T1.3 %>%
 mutate(concavity= fct_inorder(concavity)) %>%
 ggplot(aes(diagnosis, ..count..)) +
+  labs(title="Concavity of the nuclei in breast tumors", y ="Number of samples ", x = "Diagnosis") +
    geom_bar(fill= "coral 1", alpha = 0.7, position = "dodge") +
+   ylim(0, 330) +
    facet_wrap(~ concavity) +
-   geom_text(aes(label = ..count..), stat = "count", vjust = 0.1)
+   geom_text(aes(label = ..count..), stat = "count", vjust = 0.1) +
+     theme_minimal() 
 print(T1.5)
 
 ```
@@ -112,9 +123,12 @@ print(T1.6)
 #A graph similar to the one in T1.5 was created using T1.6(the ordered and collapsed data set) to show that there are now 3 categories instead of 4.
 T1.7 <- T1.6 %>%
 ggplot(aes(diagnosis, ..count..)) +
+   labs(title="Concavity of the nuclei in breast tumors", y ="Number of samples ", x = "Diagnosis") +
    geom_bar(fill= "coral 1", alpha = 0.7, position = "dodge") +
    facet_wrap(~ concavity) +
-   geom_text(aes(label = ..count..), stat = "count", vjust = 0.1)
+   geom_text(aes(label = ..count..), stat = "count", vjust = 0.1) +
+    theme_minimal() 
+  
 print(T1.7)
 ```
 
@@ -140,7 +154,9 @@ A function will be used to obtain the summary of the model with useful values li
 ## The aesthetic specification can be in the ggplot function or in the geom layers, when used in the geom layers is to specify that the functions is related to variables in the data set.
 T2.0<- cancer_sample %>%
   ggplot(aes(area_mean, perimeter_mean)) + 
-  geom_point(aes(colour=diagnosis))
+  labs(title="Relationship between the area and perimeter of the nuclei in breast cancer tumors", y ="Perimeter of the nuclei (um)", x = "Area of the nuceli (um^2)") +
+  geom_point(aes(colour=diagnosis)) +
+   theme_minimal()
 T2.0
 
 #First a tibble was created from the cancer_samples data set with the variables of interest, dropping irrelevant columns.
