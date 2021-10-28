@@ -1,6 +1,0 @@
-[1,"Installing 'gsheet' ...\n"]
-[2,"trying URL 'https://cran.rstudio.com/bin/macosx/contrib/4.1/gsheet_0.4.5.tgz'\n"]
-[2,"Content type 'application/x-gzip' length 16027 bytes (15 KB)\n==================================================\ndownloaded 15 KB\n\n"]
-[1,"The downloaded binary packages are in\n"]
-[1,"\t/var/folders/tj/r9qw6t612p329_sb38_25f0w0000gn/T//RtmpgevWWi/downloaded_packages\n"]
-[2,"\n\n✔ Package 'gsheet' successfully installed.\n"]

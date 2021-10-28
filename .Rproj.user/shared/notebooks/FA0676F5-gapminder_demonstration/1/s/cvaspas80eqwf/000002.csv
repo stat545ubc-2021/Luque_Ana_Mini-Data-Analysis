@@ -1,2 +1,0 @@
-"0","gapminder_pop <- bind_rows(gapminder, population) %>% "
-"0","  arrange(country,year)"

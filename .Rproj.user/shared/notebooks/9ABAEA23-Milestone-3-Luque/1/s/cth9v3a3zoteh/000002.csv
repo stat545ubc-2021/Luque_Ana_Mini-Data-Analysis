@@ -1,8 +1,0 @@
-"0","#install packages with: install.packages(""package"") if not installed already"
-"0","library(datateachr) #contains the cancer_sample data set I am working with."
-"0","library(tidyverse) #packages that allows to analyze data(tibble)."
-"0","library(forcats) #package that helps analyzing factors."
-"0","library(broom) #provides the information of a model in a tibble."
-"0","library(here) #to create CSV files from tibbles"
-"2","here() starts at /Users/anacl/Documents/1. UBC/STAT545/Collaborative/Luque_Ana_Mini-Data-Analysis
-"

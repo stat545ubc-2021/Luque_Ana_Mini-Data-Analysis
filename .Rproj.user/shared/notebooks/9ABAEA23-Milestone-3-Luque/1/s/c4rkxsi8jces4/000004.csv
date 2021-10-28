@@ -1,3 +1,0 @@
-"0","fit <- T2.2"
-"0","saveRDS(fit, here::here(""output"", ""lm_model.rds""))"
-"0","my_model <- readRDS(here::here(""output"", ""lm_model.rds""))"
