@@ -19,9 +19,9 @@ library(ggpubr) #package that allows you to combine multiple plots in one graph 
 theme_set(theme_pubr()) #Default function theme_pubr that creates a publication-ready theme.
 ```
 # Introduction to the file
-During Milestone 3, I will be working with the data set: **Cancer_samples**. This tibble was obtained from the UCI Machine Learning Repository and it contains information about the cell nuclei in the biopsy of a breast cancer mass obtained with fine needle aspirate (FNA) and analyzed through machine learning using digitized imaging. For more information about the data set the README file on the Github repository can be consulted.
+During Milestone 3, I will be working with the data set: **Cancer_samples**. This tibble was obtained from the UCI Machine Learning Repository. It contains information about the cell nuclei in the biopsy of a breast cancer mass obtained with fine needle aspirate (FNA) and analyzed through machine learning using digitized imaging. For more information about the data set, the README file on the Github repository can be consulted.
 
-On Milestone 2 four research questions were analyzed to determine if it is possible to use Machine learning to process biopsy from cancer patience and diagnose if the tumor is malign or benign. This could significantly decrease the processing time it takes for the pathology department to process samples. In cancer patients, time is quite valuable, the sooner the treatment is started, the better the probabilities of surviving. In this file I will be sharpening the results by manipulating special data types (factors), fitting a model and using it to make predictions. 
+On Milestone 2, four research questions were analyzed to determine if it is possible to use Machine learning to process biopsy from cancer patients and diagnose whether a tumor is malign or benign. This process could significantly decrease the processing time it takes for the pathology department to process samples. In cancer patients, time is precious; the sooner the treatment is started, the better the probabilities of surviving. In this file, I will be sharpening the results by manipulating particular data types (factors), fitting a model, and using it to make predictions.
 
 **Research questions**
 
@@ -32,20 +32,20 @@ On Milestone 2 four research questions were analyzed to determine if it is possi
 
 # Task 1: Special Data Types
 
-For the first task I will be focusing in the next research question:
+For the first task, I will be focusing in the next research question:
 
 *1. Could it be possible to diagnose the tumor of a patient just by looking at the concavity of the nuclei?*
 
 ## Reordering factors
-Benign and malign tumors have different properties, the first ones tend to still have some of the native markers of the cells. On the other hand, malign tumors tend to have aberrant behavior and shape. The most common way to diagnose a patient is analyzing a biopsy obtained from the tumor, usually this is done by a pathologist. As mentioned before, benign tumors tend to have properties similar to healthy cells, this means that the shape of their nuclei is not as deformed as the ones of malign cells. 
+Benign and malign tumors have different properties; the first ones tend still to have some of the native markers of the cells. On the other hand, malign tumors tend to have aberrant behavior and shape. The most common way to diagnose a patient is by analyzing a biopsy obtained from the tumor; a pathologist usually does this. As mentioned before, benign tumors tend to have properties similar to healthy cells; this means that the shape of their nuclei is not as deformed as the ones of malign cells. 
 
-The concavity of the nuclei refers to the severity of concave portions of the contour. The higher the concavity the less likely that cells look spherical. Healthy cells have spherical or oblong nucleus without severe concave portions, having a concavity of zero. Aberrant cells have huge concave portions having a concavity closer to one.
+The concavity of the nuclei refers to the severity of concave portions of the contour. The higher the concavity, the less likely that cells look spherical. Healthy cells have a spherical or oblong nucleus without severe concave portions, having a concavity of zero. Aberrant cells have huge concave portions having a concavity closer to one.
 
-Based on the analysis done in Milestone 2, four categories were created. The first category is zero, which only contains the samples that have no concavity portions, therefore there is no severity in those portions, having a spherical shape. Normal corresponds to nuclei whose concavity value is less than 0.1, which is closer to the shape of healthy cells. If the concavity is between 0.1 and 0.25, is labeled as high, since those values indicate that there is a clear problem with the cell. Higher than 0.25 were classified as very high, those cells have an aberrant nucleus and definitely are undergoing a tumorous process.
+Based on the analysis done in Milestone 2, four categories were created. The first category is zero, which only contains the samples with no concavity portions; therefore, there is no severity in those portions, having a spherical shape. Normal corresponds to nuclei whose concavity value is less than 0.1, which is closer to the shape of healthy cells. If the concavity is between 0.1 and 0.25, it is labeled as high since those values indicate an apparent problem with the cell. Higher than 0.25 were classified as very high; those cells have an aberrant nucleus and are undergoing a tumorous process.
 
-Since R orders the categories alphabetically (Graph T1.4) there is a need to *reorder the factors shown in the original plot*, since it does not make sense having first the category high, then low, very low and finally zero. The categories will be re-order so that in the plot they appear from the lowest concavity to the highest, in numerical ascending order (Graph T1.6). The ordering was done to help visualizing the differences of the three categories and if more or just malign tumors appeared in the high and very high category. 
+Since R orders the categories alphabetically (Graph T1.4), there is a need to *reorder the factors shown in the original plot* since it does not make sense to have first the category high, then low, very low, and finally zero. The categories will be re-order so that in the plot, they appear from the lowest concavity to the highest, in numerically ascending order (Graph T1.6). The ordering was done to help visualize the differences of the three categories and if more or just malign tumors appeared in the high and very high categories. 
 
-A factor is a categorical value that stores both string and integer data values as levels, concavity will become a factor after dividing into categories. Levels refers to the four categories created inside the concavity factor
+A factor is a categorical value that stores both string and integer data values as levels, concavity will become a factor after dividing the info into categories. Levels refers to the four categories created inside the concavity factor
 
 ```{r}
 # A tibble was created including just the variables of interest for this research question, diagnosis and concavity, dropping irrelevant columns using the select function.
@@ -56,18 +56,18 @@ T1.1 <- cancer_sample %>%
   select(diagnosis, concavity_value) %>%
   arrange(concavity_value)
 
-#A first approach to see if there is a difference between the two diagnosis groups is seeing at the summarized mean. 
-#Group_by is used to create a grouped tibble so that the rest of the functions are perform in every group, in this case in both benign and malign tumors, and the results are shown separately.
-#Summarise allows you to create new columns of summarized variables, giving one row per group. It can be used to calculate summary statistics
+#A first approach to seeing a difference between the two diagnosis groups is seeing at the summarized mean. 
+#Group_by is used to create a grouped tibble so that the rest of the functions are performed in every group, in this case in both benign and malign tumors, and the results are shown separately.
+#Summarise allows you to create new columns of summarized variables, giving one row per group. It can be used to calculate summary statistics.
 T1.2 <- T1.1 %>%
   group_by(diagnosis)%>%
   summarise(Mean_concavity = mean(concavity_value)) %>%
   mutate(across(where(is.numeric), ~ round(., 3)))
 T1.2
 
-#A tibble was created with just the variables of interest, diagnosis and concavity using the function select.
-#The numerical variable of concavity were divided into zero, low, high, and very high categories using the mutate function to create a new column from an existing one.
-#Case_when was used to categorize the values into 3 different categories, the true value is stated for the values that didn't meet the categories established before.
+#A tibble was created with just the variables of interest, diagnosis, and concavity using the function selected.
+#The numerical variable of concavity was divided into zero, low, high, and very high categories using the mutate function to create a new column from an existing one.
+#Case_when was used to categorize the values into three categories, the true value is stated for the values that did not meet the categories established before.
 T1.3<- T1.1 %>%
      mutate(concavity = case_when (concavity_value ==0 ~  "zero", 
                                    concavity_value <0.1 ~  "normal", 
@@ -76,9 +76,9 @@ T1.3<- T1.1 %>%
 T1.3
 
 
-# A bar graph was created using the ggplot2 package to visualize the number of samples in every category, the function ..count.. is used instead of the y axis to the bar graph, being able to show the number of samples instead of the frequencies.  
+# A bar graph was created using the ggplot2 package to visualize the number of samples in every category; the function ..count.. is used instead of the y axis to the bar graph, showing the number of samples instead of the frequencies.  
 #ylim is used to change the limit of the y axis, so the number 316 can be seen on the plot 
-# Using geom_text the exact number of every category will appear in a label at the top of the bar graph. 
+# Using geom_text, the exact number of every category will appear in a label at the top of the bar graph. 
 #Theme is used to change the theme of the graph
 T1.4 <- ggplot(T1.3, aes(diagnosis, ..count..)) +
    labs(title="Concavity of the nuclei in breast tumors", y ="Number of samples ", x = "Diagnosis") +
@@ -89,9 +89,9 @@ T1.4 <- ggplot(T1.3, aes(diagnosis, ..count..)) +
    theme_minimal()
 print(T1.4)
 
-#The factors will be re order so they not appear alphabetically but in ascending concavity order
+#The factors will be reordered, so they do not appear alphabetically but in ascending concavity order
 #Fct_inorder from the forcats package reorder factor levels by the order in which they first appear in the tibble (concavity ascending order)
-#The same plot is created, now using the modified data set with the levels re-ordered
+#The same plot is created, now using the modified data set with the levels reordered.
 T1.5 <- T1.3 %>%
 mutate(concavity= fct_inorder(concavity)) %>%
 ggplot(aes(diagnosis, ..count..)) +
@@ -107,20 +107,20 @@ print(T1.5)
 
 *Analysis*
 
-By analyzing just the grouped means it is obvious that there is a clear difference between the two groups, being the average concavity of malign tumors around 350 times bigger than the benign samples.The T1.5 graph is ordered by ascending concavity, in that way it is easier to detect that the only samples that do not have concavity portions are benign tumors and that most of their samples are in the normal category. Nevertheless, there is presence of benign samples in both high and very high categories making it impossible to diagnose a tumor just by it's concavity. 
+By analyzing just the grouped means, it is evident that there is a clear difference between the two groups, being the average concavity of malign tumors is around 350 times bigger than the benign samples. The T1.5 graph is ordered by ascending concavity; in that way, it is easier to detect that the only samples that do not have concavity portions are benign tumors and that most of their samples are in the normal category. Nevertheless, benign samples in both high and very high categories make it impossible to diagnose a tumor just by its concavity. 
 
 ## Grouping some factor levels 
 
-The category "Zero" contains just the 2.3% of the samples it doesn't represents a huge portion of the population. Moreover, it is probable that those samples were actually healthy cells and none from the tumor, because in some cases is hard to separate the two populations. Furthermore, even healthy cells sometimes have a level of concavity portions, for that reason zero could be grouped with the category of normal. Having less categories the plot presented is easier to read.
+The category "Zero" contains just 2.3% of the samples; it does not represent a considerable portion of the population. Moreover, those samples were probably actually healthy cells and none from the tumor, because in some cases is hard to separate the two populations. Furthermore, even healthy cells sometimes have a level of concavity portions; for that reason, zero could be grouped with the category of normal. By having fewer categories, the plot presented is easier to read.
 
 ```{r}
 T1.6 <- T1.3 %>%
-#fct_collpase is a function in the forcats package used to group some factor levels together you need to specify the factor, the new level and the levels you are going to collapse 
+#fct_collpase is a function in the forcats package used to group some factor levels together you need to specify the factor, the new level, and the levels you are going to collapse. 
 mutate(concavity = fct_collapse(concavity, normal =c("zero","normal"))) %>%
 mutate(concavity= fct_inorder(concavity))
 print(T1.6)
 
-#A graph similar to the one in T1.5 was created using T1.6(the ordered and collapsed data set) to show that there are now 3 categories instead of 4.
+#A graph similar to the one in T1.5 was created using T1.6 (the ordered and collapsed data set) to show that there are now 3 categories instead of 4.
 T1.7 <- T1.6 %>%
 ggplot(aes(diagnosis, ..count..)) +
    labs(title="Concavity of the nuclei in breast tumors", y ="Number of samples ", x = "Diagnosis") +
@@ -134,11 +134,11 @@ print(T1.7)
 
 *Analysis*
 
-Grouping the zero and normal category makes sense because zero belongs to the normal category as well as cells with a low concavity (less than 0.1). In this new plot the 3 categories are organized in a horizontal way making it easier to see that there are more samples in the normal category and that malign tumors have a bigger representation in the categories high and very high. Meaning that malign tumors tend to have more aberrant nuclei shape with more severe concavity portions.
+Grouping the zero and normal category makes sense because zero belongs to the normal category as well as cells with a low concavity (less than 0.1). In this new plot, the three categories are organized horizontally, making it easier to see that there are more samples in the normal category and that malign tumors have a more significant representation in the high and very high categories, which means that malign tumors tend to have more aberrant nuclei shape with more severe concavity portions.
 
 # Task 2: Modelling 
 
-For the second task I will be focusing in the next research question and variable:
+For the second task, I will be focusing in the next research question and variable:
 
 **Research question:**
 *2. Is there a relationship between the area of the nuclei and the perimeter in malign tumors?*
@@ -146,12 +146,12 @@ For the second task I will be focusing in the next research question and variabl
 **Variable**
 Perimeter of the nuclei (area_mean)
 
-Using this research question it would be possible to create a model that accurately creates predictions based on two variables.First of all a scatter plot was created to see the relationship between area and perimeter of the nuclei in the two diagnosis groups, to see if it makes sense using different models for benign and malign tumors. Both perimeter and area should be related by a linear model, since there is a mathematical relationship between them, however the nuclei don't have a perfect round shape. Since the data was obtained by computational analysis maybe the model won't be perfect and I think is worth exploring it, to see if the measurements are reliable. Finally these two variables are the ones whose mean values grouped by diagnosis are more different between them. So analyzing them could give us a good approach to determine the diagnose of a biopsy. 
+Using the research question mentioned above, it would be possible to create a model that accurately creates predictions based on two variables. First of all, a scatter plot was created to see the relationship between the area and perimeter of the nuclei in the two diagnosis groups to see if it makes sense to use different models for benign and malign tumors. A linear model should relate both perimeter and area since there is a mathematical relationship between them; however, the nuclei do not have a perfectly round shape. Since the data was obtained by computational analysis, maybe the model will not be perfect, and I think it is worth exploring it to see if the measurements are reliable. Finally, these two variables are the ones whose mean values grouped by diagnosis are more different between them. So, analyzing them could give us an excellent approach to determine the diagnose of a biopsy. 
 
-A function will be used to obtain the summary of the model with useful values like R^2 to validate that the model fits the data. Later on it would be use to do predictions in the same data obtaining fit values and its errors. Finally the model for malign tumors will be used in the data of benign tumors to see if it is a good a approximation or how much it deviates from the original data. 
+A function will be used to obtain the summary of the model with valuable values like R^2 to validate that the model fits the data. Later on, it would be used to make predictions in the same data obtaining fit values and errors. Finally, the model for malign tumors will be used in the data of benign tumors to see if it is a good approximation or how much it deviates from the original data.
 ```{r}
-#A scatter plot was created (using ggplot2 package geom_pint function) to visualize the relationship between perimeter and area of the nuclei of both diagnosed groups
-## The aesthetic specification can be in the ggplot function or in the geom layers, when used in the geom layers is to specify that the functions is related to variables in the data set.
+#A scatter plot was created (using ggplot2 package geom_pint function) to visualize the relationship between perimeter and area of the nuclei of both diagnosed groups.
+## The aesthetic specification can be in the ggplot function or in the geom layers. When used in the geom layers is to specify that the functions is related to variables in the data set.
 T2.0<- cancer_sample %>%
   ggplot(aes(area_mean, perimeter_mean)) + 
   labs(title="Relationship between the area and perimeter of the nuclei in breast cancer tumors", y ="Perimeter of the nuclei (um)", x = "Area of the nuceli (um^2)") +
@@ -159,7 +159,7 @@ T2.0<- cancer_sample %>%
    theme_minimal()
 T2.0
 
-#First a tibble was created from the cancer_samples data set with the variables of interest, dropping irrelevant columns.
+#First, a tibble was created from the cancer_samples data set with the variables of interest, dropping irrelevant columns.
 #The variables of interest were renamed so it will be easier to call them in a function.
 #It was arranged in ascending order according to the area.
 #It was filtered just the samples diagnosed as malign, since those are the samples I will be focusing on.
@@ -170,26 +170,26 @@ T2.1<- cancer_sample %>%
   filter(diagnosis == "M")
 T2.1
 
-#To create a model they type of model need to be specified using the arguments of the y variable, x variable and the data set where the variables are located
+#To create a model, the type of model needs to be specified using the arguments of the y variable, x variable and the data set where the variables are located.
 #lm is used to fit linear models.
-# The model was stored in the variable T2.2
+# The model was stored in the variable T2.2.
   T2.2 <- lm(perimeter ~ area, T2.1)
 print(T2.2)
 
-#For better visualization of the model glance (from the broom package) function was used to validate the model.
+#For better visualization of the model, glance (from the broom package) function was used to validate the model.
 #Glance returns a tibble that contains the summary of typically goodness of fit measures, p-values for hypothesis tests on residuals etc..
 T2.3 <-glance(T2.2)
 T2.3
 
-#Since the r.squared and the p.value shows promising results predictions can be made using the model 
-# Augmente function froom the broom package adds predictions of the dependent variable using the model, residuals, and cluster assignments to the original data that was modeled (malign samples)
+#Since the r.squared and the p.value shows promising results, predictions can be made using the model. 
+# Augment function from the broom package adds predictions of the dependent variable using the model, residuals, and cluster assignments to the original data that was modeled (malign samples).
 T2.3 <-augment(T2.2)
 T2.3
 
-#In order to teste the model using the area of the benign samples as the independent variable a new tibble need to be created
-#I filter the samples that contains B as the diagnosis
-#The tibble need to have the same column names of he dependent (perimeter) and independent (area) variables 
-#The model can only be used in tibbles that have the same size as the original tibble, for that reason just the first 212 rows were selected
+#In order to test the model using the area of the benign samples as the independent variable, a new tibble needs to be created.
+#I filtered the samples that contains B as the diagnosis-
+#The tibble needs to have the same column names of the dependent (perimeter) and independent (area) variables. 
+#The model can only be used in tibbles that have the same size as the original tibble; for that reason, just the first 212 rows were selected.
 B1<- cancer_sample %>%
   rename(c("area"="area_mean", "perimeter"="perimeter_mean")) %>%
   select(diagnosis, area, perimeter) %>%
@@ -198,8 +198,8 @@ B1<- cancer_sample %>%
   slice(1:212)
 
 
-#Predictions of the perimeter usgin the area of the nucli of bening tumors.
-#Besides specifiying the model the new data set (B1 from the are will be ontain) needs to be specified.
+#Predictions of the perimeter using the area of the nuclei of benign tumors.
+#BBesides specifying the model, the new data set (B1 from the will be obtained) needs to be specified.
 T2.3 <-augment(T2.2, B1)
 T2.3
 
@@ -207,14 +207,15 @@ T2.3
 
 *Analysis*
 
-Viewing the scatter plot from T2.0 it can be seen that there is a linear relation ship between the area and the perimeter of the nuclei in both benign and malign tumors, therefore the linear model function can be used. Nevertheless the groups (marked with different colors) have different slopes, so it would not be appropriate to use the same model for both groups. To use a model juts for malign tumors a new tibble needs to be created and is the one in T2.1. The model just show the coefficients and intercepts (the equation), but with that information you cannot know if it is a good fit. 
+Viewing the scatter plot from T2.0, it can be seen that there is a linear relationship between the area and the perimeter of the nuclei in both benign and malign tumors; therefore, the linear model function can be used. Nevertheless, the groups (marked with different colors) have different slopes, so it would not be appropriate to use the same model for both groups. To use a model just for malign tumors, a new tibble needs to be created, and is the one in T2.1. The model shows the coefficients and intercepts (the equation), but you cannot know if it is a good fit using only that information. 
 
-The glance function shows values that are useful to validate the model. The r^2 is value used to see how good the model fits the data, it indicates the percentage of the variance in the dependent variable that the independent variables explain collectively. The closer the r^2 is to 1 the better the fit. Having a value of 0.97 represents that the data have a linear relationship and that it can be explained by the model.
+The glance function shows values that are useful to validate the model. The r^2 is a value used to see how well the model fits the data; it indicates the percentage of the variance in the dependent variable that the independent variables explain collectively. The closer the r^2 is to 1, the better the fit. A value of 0.97 represents that the data have a linear relationship and that the model can explain it.
 
-Moreover, the p-value tests the null hypothesis that there is no linear relationship between the two variables. A low p-value like the one obtained by my model indicates that you can reject the null hypothesis demonstrating that thee is a *significant linear relationship between the two values*.
+Moreover, the p-value tests the null hypothesis that there is no linear relationship between the two variables. A low p-value like the one obtained by my model indicates that you can reject the null hypothesis demonstrating that there is a
+*significant linear relationship between the two values*.
 
-Haven proven that the model has a good fit it can be used to make predictions. In T2.3 it is shown that the fitted perimeter  appears next to the original data, it also can be seen the difference between the two values. The predicted values are quite similar  (±5) in most of the samples
-Finally, the model was used to predict the perimeter based on the are of the nuclei of benign samples. As stated before the behavior of these diagnosis group is different, yielding predicted values with higher difference from the original values. 
+Haven proved that the model has a good fit it can be used to make predictions. In T2.3, it is shown that the fitted perimeter appears next to the original data; the difference between the two values can also be seen. The predicted values are pretty similar (±5) in most of the samples
+Finally, the model was used to predict the perimeter based on the nuclei of benign samples. As stated before, the behavior of these diagnosis groups is different, yielding predicted values with a higher difference from the original values.
 
 # Task 3: Reading and writing data
 
@@ -222,11 +223,11 @@ Finally, the model was used to predict the perimeter based on the are of the nuc
 A CSV will be created from a table done in Milestone 2, Task 1.2, Research question 1. 
 
 ```{r}
-#Group_by is used to create a grouped tibble so that the rest of the functions are perform in every group, in this case in both benign and malign tumors, and the results are shown separately.
+#Group_by is used to create a grouped tibble so that the rest of the functions are performed in every group, in both benign and malign tumors, and the results are shown separately.
 #Arrange order the rows of a data frame in ascending order.
-#Summarise allows you to create new columns of summarized variables, giving one row per group. It can be used to calculate summary statistics
+#Summarize allows you to create new columns of summarized variables, giving one row per group. It can be used to calculate summary statistics
 #n() functions will count the number of rows in a group and will give the amount of benign and malign samples
-#Mutate is used to create new variables using the existing variables, in this case is used in all numeric values to round up to one decimal
+#Mutate is used to create new variables using the existing variables; in this case is used in all numeric values to round up to one decimal
 T3.1 <- cancer_sample %>%
   group_by(diagnosis) %>%
   arrange(area_mean)  %>%
@@ -239,8 +240,8 @@ T3.1 <- cancer_sample %>%
 T3.1
 
 
-#Write_csv is a function used to convert the tibble (write) into a comma-separated value (csv) file 
-#The name of the folder where it will be located and the name of the new file is specified in quotations 
+#Write_csv is a function used to convert the tibble (write) into a comma-separated value (csv) file. 
+#The name of the folder where it will be located, and the new file's name is specified in quotations. 
 #Here function from the Here package allow you to locate where the RMD file is located
 #The quotations are used to specify the name of the folder where the file will be saved
 write_csv(T3.1, here("Output", "Area_tumors_exported_file.csv"))
@@ -249,14 +250,14 @@ dir(here::here("Output")) #To know the location of the file
 
 ## 3.2
 
-The linear model showing the relationship between the area and the perimeter of the nuclei of malign tumors will be saved to an R binary file (an RDS). The the model can be loaded again into a new variable
+The linear model showing the relationship between the area and the perimeter of the nuclei of malign tumors will be saved to an R binary file (an RDS). The model can be loaded again into a new variable.
 ```{r}
-#SaveRDS need the name of the model, the location where it will be saved and the name of the new file
+#SaveRDS needs the name of the model, the location where it will be saved, and the name of the new file.
 saveRDS(T2.2, here("Output", "model.rds"))
 dir(here::here("Output"))
 
-#The model will be loaded and save into a new variable called T3.2
-#ReadRDS needs the location and name of the file 
+#The model will be loaded and saved into a new variable called T3.2.
+#ReadRDS needs the location and name of the file. 
 T3.2 <- readRDS(here("output", "model.rds"))
 T3.2
 ```
