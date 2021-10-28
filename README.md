@@ -46,8 +46,8 @@ Furthermore, an exploration about tidy and untidy data was made.
 
 :pencil2: *Milestone 3*
 
-In this file two research questions were chosen to sharpen the results. The main intention of this milestone is manipulating special data types specifically factors. Moreover a linear model was created between two variables. Later on the model was used to make predictions in both malign and benign samples.  
-Finally a CSV file was created from a summary table, the function here::here was used to save the file in a specific location within the project repository. The model was saved in a RDS file, making it possible to load it again from any other RMD file.  
+In this file, two research questions were chosen to sharpen the results. The main intention of this milestone is to manipulate special data types, specifically factors. Moreover, a linear model was created between two variables. Later on, the model was used to make predictions in both malign and benign samples.  
+Finally, a CSV file was created from a summary table, the function here::here was used to save the file in a specific location within the project repository. The model was saved in a RDS file, making it possible to load it again from any other RMD file.  
 
 The following research questions were analyzed.
 
